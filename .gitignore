@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Xcode
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Vitest
+.vite/
+
+# Logs
+*.log
