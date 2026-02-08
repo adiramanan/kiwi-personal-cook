@@ -1,0 +1,932 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		/* App Sources */
+		A100000001 /* KiwiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000001; };
+		A100000002 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000002; };
+		/* Features - Scan */
+		A100000010 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000010; };
+		A100000011 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000011; };
+		A100000012 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000012; };
+		/* Features - Results */
+		A100000020 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000020; };
+		A100000021 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000021; };
+		A100000022 /* IngredientRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000022; };
+		/* Features - RecipeDetail */
+		A100000030 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000030; };
+		A100000031 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000031; };
+		/* Features - Account */
+		A100000040 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000040; };
+		A100000041 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000041; };
+		A100000042 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000042; };
+		/* Domain - Models */
+		A100000050 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000050; };
+		A100000051 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000051; };
+		A100000052 /* ScanResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000052; };
+		A100000053 /* QuotaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000053; };
+		/* Domain - UseCases */
+		A100000060 /* ScanFridgeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000060; };
+		A100000061 /* GetQuotaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000061; };
+		A100000062 /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000062; };
+		/* Data - Network */
+		A100000070 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000070; };
+		A100000071 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000071; };
+		A100000072 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000072; };
+		A100000073 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000073; };
+		/* Data - Auth */
+		A100000080 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000080; };
+		A100000081 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000081; };
+		/* Data - ImageProcessing */
+		A100000090 /* ImageMetadataStripper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000090; };
+		/* Data - RateLimit */
+		A100000100 /* ClientRateLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000100; };
+		/* Shared - Components */
+		A100000110 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000110; };
+		A100000111 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000111; };
+		A100000112 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000112; };
+		/* Shared - Theme */
+		A100000120 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000120; };
+		A100000121 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000121; };
+		/* Resources */
+		A100000130 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B100000130; };
+		A100000131 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B100000131; };
+		/* Test Sources */
+		A200000001 /* ScanFridgeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000001; };
+		A200000002 /* RecipeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000002; };
+		A200000003 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000003; };
+		A200000004 /* ImageMetadataStripperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000004; };
+		A200000005 /* ClientRateLimiterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000005; };
+		A200000006 /* ScanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000006; };
+		A200000007 /* ResultsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000007; };
+		A200000008 /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000008; };
+		/* UI Test Sources */
+		A300000001 /* ScanFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D300000001; };
+		A300000002 /* AccountFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D300000002; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E100000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F100000001;
+			proxyType = 1;
+			remoteGlobalIDString = F200000001;
+			remoteInfo = Kiwi;
+		};
+		E100000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F100000001;
+			proxyType = 1;
+			remoteGlobalIDString = F200000001;
+			remoteInfo = Kiwi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		/* Products */
+		F300000001 /* Kiwi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiwi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F300000002 /* KiwiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F300000003 /* KiwiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		/* App Sources */
+		B100000001 /* KiwiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwiApp.swift; sourceTree = "<group>"; };
+		B100000002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B100000010 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		B100000011 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		B100000012 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B100000020 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		B100000021 /* ResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModel.swift; sourceTree = "<group>"; };
+		B100000022 /* IngredientRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRow.swift; sourceTree = "<group>"; };
+		B100000030 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		B100000031 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		B100000040 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		B100000041 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		B100000042 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		B100000050 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		B100000051 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		B100000052 /* ScanResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResponse.swift; sourceTree = "<group>"; };
+		B100000053 /* QuotaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaInfo.swift; sourceTree = "<group>"; };
+		B100000060 /* ScanFridgeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanFridgeUseCase.swift; sourceTree = "<group>"; };
+		B100000061 /* GetQuotaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuotaUseCase.swift; sourceTree = "<group>"; };
+		B100000062 /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
+		B100000070 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B100000071 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		B100000072 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		B100000073 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		B100000080 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		B100000081 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		B100000090 /* ImageMetadataStripper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadataStripper.swift; sourceTree = "<group>"; };
+		B100000100 /* ClientRateLimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientRateLimiter.swift; sourceTree = "<group>"; };
+		B100000110 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		B100000111 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		B100000112 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		B100000120 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B100000121 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		B100000130 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B100000131 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		/* Test Sources */
+		C200000001 /* ScanFridgeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanFridgeUseCaseTests.swift; sourceTree = "<group>"; };
+		C200000002 /* RecipeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModelTests.swift; sourceTree = "<group>"; };
+		C200000003 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		C200000004 /* ImageMetadataStripperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadataStripperTests.swift; sourceTree = "<group>"; };
+		C200000005 /* ClientRateLimiterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientRateLimiterTests.swift; sourceTree = "<group>"; };
+		C200000006 /* ScanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModelTests.swift; sourceTree = "<group>"; };
+		C200000007 /* ResultsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModelTests.swift; sourceTree = "<group>"; };
+		C200000008 /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
+		/* UI Test Sources */
+		D300000001 /* ScanFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanFlowUITests.swift; sourceTree = "<group>"; };
+		D300000002 /* AccountFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowUITests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F400000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F400000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F400000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G000000001 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				G000000010 /* Kiwi */,
+				G000000020 /* KiwiTests */,
+				G000000030 /* KiwiUITests */,
+				G000000040 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G000000010 /* Kiwi */ = {
+			isa = PBXGroup;
+			children = (
+				G000000011 /* App */,
+				G000000012 /* Features */,
+				G000000013 /* Domain */,
+				G000000014 /* Data */,
+				G000000015 /* Shared */,
+				G000000016 /* Resources */,
+			);
+			path = Kiwi;
+			sourceTree = "<group>";
+		};
+		G000000011 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B100000001 /* KiwiApp.swift */,
+				B100000002 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		G000000012 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				G000000120 /* Scan */,
+				G000000121 /* Results */,
+				G000000122 /* RecipeDetail */,
+				G000000123 /* Account */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		G000000120 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				B100000010 /* ScanView.swift */,
+				B100000011 /* ScanViewModel.swift */,
+				B100000012 /* ImagePicker.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		G000000121 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				B100000020 /* ResultsView.swift */,
+				B100000021 /* ResultsViewModel.swift */,
+				B100000022 /* IngredientRow.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		G000000122 /* RecipeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B100000030 /* RecipeDetailView.swift */,
+				B100000031 /* RecipeDetailViewModel.swift */,
+			);
+			path = RecipeDetail;
+			sourceTree = "<group>";
+		};
+		G000000123 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				B100000040 /* AccountView.swift */,
+				B100000041 /* AccountViewModel.swift */,
+				B100000042 /* SignInView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		G000000013 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				G000000130 /* Models */,
+				G000000131 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		G000000130 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B100000050 /* Ingredient.swift */,
+				B100000051 /* Recipe.swift */,
+				B100000052 /* ScanResponse.swift */,
+				B100000053 /* QuotaInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G000000131 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				B100000060 /* ScanFridgeUseCase.swift */,
+				B100000061 /* GetQuotaUseCase.swift */,
+				B100000062 /* DeleteAccountUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		G000000014 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				G000000140 /* Network */,
+				G000000141 /* Auth */,
+				G000000142 /* ImageProcessing */,
+				G000000143 /* RateLimit */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		G000000140 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B100000070 /* APIClient.swift */,
+				B100000071 /* APIError.swift */,
+				B100000072 /* Endpoint.swift */,
+				B100000073 /* AuthInterceptor.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		G000000141 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B100000080 /* AuthService.swift */,
+				B100000081 /* KeychainHelper.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		G000000142 /* ImageProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				B100000090 /* ImageMetadataStripper.swift */,
+			);
+			path = ImageProcessing;
+			sourceTree = "<group>";
+		};
+		G000000143 /* RateLimit */ = {
+			isa = PBXGroup;
+			children = (
+				B100000100 /* ClientRateLimiter.swift */,
+			);
+			path = RateLimit;
+			sourceTree = "<group>";
+		};
+		G000000015 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				G000000150 /* Components */,
+				G000000151 /* Theme */,
+				G000000152 /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		G000000150 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B100000110 /* LoadingView.swift */,
+				B100000111 /* ErrorView.swift */,
+				B100000112 /* PrimaryButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		G000000151 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B100000120 /* Colors.swift */,
+				B100000121 /* Typography.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		G000000152 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		G000000016 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B100000130 /* Assets.xcassets */,
+				B100000131 /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		G000000020 /* KiwiTests */ = {
+			isa = PBXGroup;
+			children = (
+				G000000200 /* Domain */,
+				G000000201 /* Data */,
+				G000000202 /* ViewModels */,
+			);
+			path = KiwiTests;
+			sourceTree = "<group>";
+		};
+		G000000200 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C200000001 /* ScanFridgeUseCaseTests.swift */,
+				C200000002 /* RecipeModelTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		G000000201 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C200000003 /* APIClientTests.swift */,
+				C200000004 /* ImageMetadataStripperTests.swift */,
+				C200000005 /* ClientRateLimiterTests.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		G000000202 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C200000006 /* ScanViewModelTests.swift */,
+				C200000007 /* ResultsViewModelTests.swift */,
+				C200000008 /* AccountViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		G000000030 /* KiwiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D300000001 /* ScanFlowUITests.swift */,
+				D300000002 /* AccountFlowUITests.swift */,
+			);
+			path = KiwiUITests;
+			sourceTree = "<group>";
+		};
+		G000000040 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F300000001 /* Kiwi.app */,
+				F300000002 /* KiwiTests.xctest */,
+				F300000003 /* KiwiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F200000001 /* Kiwi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F500000001;
+			buildPhases = (
+				F600000001 /* Sources */,
+				F400000001 /* Frameworks */,
+				F700000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kiwi;
+			productName = Kiwi;
+			productReference = F300000001;
+			productType = "com.apple.product-type.application";
+		};
+		F200000002 /* KiwiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F500000002;
+			buildPhases = (
+				F600000002 /* Sources */,
+				F400000002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E100000010 /* PBXTargetDependency */,
+			);
+			name = KiwiTests;
+			productName = KiwiTests;
+			productReference = F300000002;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F200000003 /* KiwiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F500000003;
+			buildPhases = (
+				F600000003 /* Sources */,
+				F400000003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E100000020 /* PBXTargetDependency */,
+			);
+			name = KiwiUITests;
+			productName = KiwiUITests;
+			productReference = F300000003;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F100000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					F200000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					F200000002 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F200000001;
+					};
+					F200000003 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F200000001;
+					};
+				};
+			};
+			buildConfigurationList = F500000010;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G000000001;
+			productRefGroup = G000000040;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F200000001 /* Kiwi */,
+				F200000002 /* KiwiTests */,
+				F200000003 /* KiwiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F700000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A100000130 /* Assets.xcassets in Resources */,
+				A100000131 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F600000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A100000001 /* KiwiApp.swift in Sources */,
+				A100000002 /* AppState.swift in Sources */,
+				A100000010 /* ScanView.swift in Sources */,
+				A100000011 /* ScanViewModel.swift in Sources */,
+				A100000012 /* ImagePicker.swift in Sources */,
+				A100000020 /* ResultsView.swift in Sources */,
+				A100000021 /* ResultsViewModel.swift in Sources */,
+				A100000022 /* IngredientRow.swift in Sources */,
+				A100000030 /* RecipeDetailView.swift in Sources */,
+				A100000031 /* RecipeDetailViewModel.swift in Sources */,
+				A100000040 /* AccountView.swift in Sources */,
+				A100000041 /* AccountViewModel.swift in Sources */,
+				A100000042 /* SignInView.swift in Sources */,
+				A100000050 /* Ingredient.swift in Sources */,
+				A100000051 /* Recipe.swift in Sources */,
+				A100000052 /* ScanResponse.swift in Sources */,
+				A100000053 /* QuotaInfo.swift in Sources */,
+				A100000060 /* ScanFridgeUseCase.swift in Sources */,
+				A100000061 /* GetQuotaUseCase.swift in Sources */,
+				A100000062 /* DeleteAccountUseCase.swift in Sources */,
+				A100000070 /* APIClient.swift in Sources */,
+				A100000071 /* APIError.swift in Sources */,
+				A100000072 /* Endpoint.swift in Sources */,
+				A100000073 /* AuthInterceptor.swift in Sources */,
+				A100000080 /* AuthService.swift in Sources */,
+				A100000081 /* KeychainHelper.swift in Sources */,
+				A100000090 /* ImageMetadataStripper.swift in Sources */,
+				A100000100 /* ClientRateLimiter.swift in Sources */,
+				A100000110 /* LoadingView.swift in Sources */,
+				A100000111 /* ErrorView.swift in Sources */,
+				A100000112 /* PrimaryButton.swift in Sources */,
+				A100000120 /* Colors.swift in Sources */,
+				A100000121 /* Typography.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F600000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A200000001 /* ScanFridgeUseCaseTests.swift in Sources */,
+				A200000002 /* RecipeModelTests.swift in Sources */,
+				A200000003 /* APIClientTests.swift in Sources */,
+				A200000004 /* ImageMetadataStripperTests.swift in Sources */,
+				A200000005 /* ClientRateLimiterTests.swift in Sources */,
+				A200000006 /* ScanViewModelTests.swift in Sources */,
+				A200000007 /* ResultsViewModelTests.swift in Sources */,
+				A200000008 /* AccountViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F600000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A300000001 /* ScanFlowUITests.swift in Sources */,
+				A300000002 /* AccountFlowUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E100000010 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F200000001;
+			targetProxy = E100000001;
+		};
+		E100000020 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F200000001;
+			targetProxy = E100000002;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		/* Project-level Debug */
+		X100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		/* Project-level Release */
+		X100000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		/* Kiwi target Debug */
+		X200000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Kiwi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Kiwi needs camera access to photograph your fridge and identify ingredients.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Kiwi needs photo library access so you can select a photo of your fridge.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		/* Kiwi target Release */
+		X200000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Kiwi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Kiwi needs camera access to photograph your fridge and identify ingredients.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Kiwi needs photo library access so you can select a photo of your fridge.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		/* KiwiTests Debug */
+		X300000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiwi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kiwi";
+			};
+			name = Debug;
+		};
+		/* KiwiTests Release */
+		X300000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiwi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kiwi";
+			};
+			name = Release;
+		};
+		/* KiwiUITests Debug */
+		X400000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kiwi;
+			};
+			name = Debug;
+		};
+		/* KiwiUITests Release */
+		X400000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kiwi;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F500000010 /* Build configuration list for PBXProject "Kiwi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X100000001 /* Debug */,
+				X100000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F500000001 /* Build configuration list for PBXNativeTarget "Kiwi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X200000001 /* Debug */,
+				X200000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F500000002 /* Build configuration list for PBXNativeTarget "KiwiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X300000001 /* Debug */,
+				X300000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F500000003 /* Build configuration list for PBXNativeTarget "KiwiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X400000001 /* Debug */,
+				X400000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = F100000001;
+}

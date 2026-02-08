@@ -1,0 +1,26 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Scan Your Fridge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan Your Fridge"
+          }
+        }
+      }
+    },
+    "Cook smarter with what you have" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cook smarter with what you have"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
