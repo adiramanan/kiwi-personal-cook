@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 final class AppState {
     var isAuthenticated: Bool = false
@@ -10,8 +11,13 @@ final class AppState {
 
     init(authService: AuthService = AuthService()) {
         self.authService = authService
-        self.sessionToken = KeychainHelper.shared.getToken()
-        self.isAuthenticated = sessionToken != nil
+        if ProcessInfo.processInfo.arguments.contains("UITEST_AUTHENTICATED") {
+            self.sessionToken = "ui-test-token"
+            self.isAuthenticated = true
+        } else {
+            self.sessionToken = KeychainHelper.shared.getToken()
+            self.isAuthenticated = sessionToken != nil
+        }
     }
 
     func signIn(identityToken: Data) async throws {

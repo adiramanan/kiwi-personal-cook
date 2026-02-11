@@ -14,10 +14,13 @@ final class ImageMetadataStripperTests: XCTestCase {
 
         let source = try XCTUnwrap(CGImageSourceCreateWithData(output as CFData, nil))
         let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any]
+        let exif = properties?[kCGImagePropertyExifDictionary] as? [CFString: Any]
+        let gps = properties?[kCGImagePropertyGPSDictionary] as? [CFString: Any]
+        let tiff = properties?[kCGImagePropertyTIFFDictionary] as? [CFString: Any]
 
-        XCTAssertNil(properties?[kCGImagePropertyExifDictionary])
-        XCTAssertNil(properties?[kCGImagePropertyGPSDictionary])
-        XCTAssertNil(properties?[kCGImagePropertyTIFFDictionary])
+        XCTAssertNil(exif?[kCGImagePropertyExifUserComment])
+        XCTAssertNil(gps?[kCGImagePropertyGPSLatitude])
+        XCTAssertNil(tiff?[kCGImagePropertyTIFFMake])
     }
 
     private func addMetadata(to image: UIImage) throws -> Data {

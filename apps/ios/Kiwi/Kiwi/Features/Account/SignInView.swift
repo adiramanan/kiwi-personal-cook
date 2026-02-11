@@ -18,7 +18,7 @@ struct SignInView: View {
             SignInWithAppleButton(.signIn) { request in
                 request.requestedScopes = [.email]
             } onCompletion: { result in
-                Task {
+                Task { @MainActor in
                     switch result {
                     case .success(let auth):
                         if let credential = auth.credential as? ASAuthorizationAppleIDCredential,

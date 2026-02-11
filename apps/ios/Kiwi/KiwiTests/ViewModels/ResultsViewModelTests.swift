@@ -28,9 +28,19 @@ final class ResultsViewModelTests: XCTestCase {
     }
 
     func testScanPopulatesIngredientsAndRecipes() async {
-        let useCase = ScanFridgeUseCase(executeImpl: { _ in
-            Self.sampleResponse()
-        })
+        let payload = try! JSONEncoder().encode(Self.sampleResponse())
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, payload)
+        }
+        let useCase = ScanFridgeUseCase(apiClient: APIClient(session: session))
 
         let viewModel = ResultsViewModel(image: UIImage(systemName: "leaf")!, scanUseCase: useCase)
         await viewModel.scan()
@@ -41,9 +51,18 @@ final class ResultsViewModelTests: XCTestCase {
     }
 
     func testScanRateLimitedSetsError() async {
-        let useCase = ScanFridgeUseCase(executeImpl: { _ in
-            throw APIError.rateLimited(retryAfter: Date())
-        })
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 429,
+                httpVersion: nil,
+                headerFields: ["Retry-After": "60"]
+            )!
+            return (response, Data())
+        }
+        let useCase = ScanFridgeUseCase(apiClient: APIClient(session: session))
 
         let viewModel = ResultsViewModel(image: UIImage(systemName: "leaf")!, scanUseCase: useCase)
         await viewModel.scan()
@@ -56,7 +75,19 @@ final class ResultsViewModelTests: XCTestCase {
     }
 
     func testRemoveIngredientRemovesById() {
-        let useCase = ScanFridgeUseCase(executeImpl: { _ in Self.sampleResponse() })
+        let payload = try! JSONEncoder().encode(Self.sampleResponse())
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, payload)
+        }
+        let useCase = ScanFridgeUseCase(apiClient: APIClient(session: session))
         let viewModel = ResultsViewModel(image: UIImage(systemName: "leaf")!, scanUseCase: useCase)
 
         viewModel.ingredients = Self.sampleResponse().ingredients

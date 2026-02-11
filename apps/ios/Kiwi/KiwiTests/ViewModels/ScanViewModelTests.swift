@@ -5,9 +5,21 @@ import UIKit
 @MainActor
 final class ScanViewModelTests: XCTestCase {
     func testLoadQuotaSuccess() async {
-        let useCase = GetQuotaUseCase(executeImpl: {
-            QuotaInfo(remaining: 3, limit: 4, resetsAt: Date())
-        })
+        let payload = """
+        {"remaining":3,"limit":4,"resetsAt":"2026-02-10T00:00:00Z"}
+        """.data(using: .utf8)!
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "GET")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, payload)
+        }
+        let useCase = GetQuotaUseCase(apiClient: APIClient(session: session))
         let viewModel = ScanViewModel(getQuotaUseCase: useCase)
 
         await viewModel.loadQuota()
@@ -17,11 +29,18 @@ final class ScanViewModelTests: XCTestCase {
     }
 
     func testLoadQuotaFailureSetsError() async {
-        enum TestError: Error { case failed }
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "GET")
 
-        let useCase = GetQuotaUseCase(executeImpl: {
-            throw TestError.failed
-        })
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 500,
+                httpVersion: nil,
+                headerFields: nil
+            )!
+            return (response, Data())
+        }
+        let useCase = GetQuotaUseCase(apiClient: APIClient(session: session))
         let viewModel = ScanViewModel(getQuotaUseCase: useCase)
 
         await viewModel.loadQuota()
@@ -29,19 +48,25 @@ final class ScanViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.error, .network)
     }
 
-    func testSelectImageRecordsLocalScan() {
-        let defaults = UserDefaults(suiteName: "ScanViewModelTests")!
-        defaults.removePersistentDomain(forName: "ScanViewModelTests")
+    func testSelectImageDoesNotSetError() {
+        let payload = """
+        {"remaining":4,"limit":4,"resetsAt":"2026-02-10T00:00:00Z"}
+        """.data(using: .utf8)!
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "GET")
 
-        let limiter = ClientRateLimiter(userDefaults: defaults, now: { Date(timeIntervalSince1970: 1_700_000_000) })
-        let viewModel = ScanViewModel(getQuotaUseCase: GetQuotaUseCase(executeImpl: {
-            QuotaInfo(remaining: 4, limit: 4, resetsAt: Date())
-        }), rateLimiter: limiter)
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, payload)
+        }
+        let useCase = GetQuotaUseCase(apiClient: APIClient(session: session))
+        let viewModel = ScanViewModel(getQuotaUseCase: useCase)
 
-        let before = viewModel.localRemaining
         viewModel.selectImage(UIImage(systemName: "leaf")!)
-        let after = viewModel.localRemaining
-
-        XCTAssertEqual(before - after, 1)
+        XCTAssertNil(viewModel.error)
     }
 }

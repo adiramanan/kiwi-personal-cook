@@ -8,7 +8,18 @@ final class AccountViewModelTests: XCTestCase {
         appState.isAuthenticated = true
         appState.sessionToken = "token"
 
-        let useCase = DeleteAccountUseCase(executeImpl: {})
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "DELETE")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, "{}".data(using: .utf8)!)
+        }
+        let useCase = DeleteAccountUseCase(apiClient: APIClient(session: session))
         let viewModel = AccountViewModel(deleteUseCase: useCase, appState: appState)
 
         await viewModel.deleteAccount()
@@ -24,9 +35,18 @@ final class AccountViewModelTests: XCTestCase {
         let appState = AppState()
         appState.isAuthenticated = true
 
-        let useCase = DeleteAccountUseCase(executeImpl: {
-            throw TestError.failed
-        })
+        let session = makeTestSession { request in
+            XCTAssertEqual(request.httpMethod, "DELETE")
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: 500,
+                httpVersion: nil,
+                headerFields: nil
+            )!
+            return (response, Data())
+        }
+        let useCase = DeleteAccountUseCase(apiClient: APIClient(session: session))
         let viewModel = AccountViewModel(deleteUseCase: useCase, appState: appState)
 
         await viewModel.deleteAccount()
