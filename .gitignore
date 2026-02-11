@@ -1,0 +1,10 @@
+# Node
+node_modules/
+
+# SwiftPM / Xcode
+.build/
+apps/ios/.build/
+DerivedData/
+
+# OS
+.DS_Store

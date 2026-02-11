@@ -1,0 +1,729 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05618296E769E6B3B575357C /* GetQuotaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671404E49AC9E167331004F /* GetQuotaUseCase.swift */; };
+		072ED2F9925A2F6C9D4E9E8A /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D854B043BFE3136D415E11CF /* AccountViewModelTests.swift */; };
+		07955D2DC5078367BFB0C696 /* QuotaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45B1E34BEB1F69DE5A6B01D /* QuotaInfo.swift */; };
+		122AFEEAC6479944BBC61072 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7F71D05BBE54F01AE5774013 /* Localizable.xcstrings */; };
+		2162FA066EE10E6DE82A81CF /* ClientRateLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B6C767615612CAB2D9F3E5 /* ClientRateLimiter.swift */; };
+		3286375030B0A6C75C4CA2E9 /* ScanFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF39AA122684CCAF2F51C337 /* ScanFlowUITests.swift */; };
+		3419A7DC843457D8ED949559 /* KiwiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C7B8ED560CCE8C6CB12337 /* KiwiApp.swift */; };
+		3518D070B525C554C1B1F27D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF46FA1841B2476D924D21D2 /* Foundation.framework */; };
+		3A99D00FE5434C9479920939 /* ClientRateLimiterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FA7910DED2492134EBD16 /* ClientRateLimiterTests.swift */; };
+		3AEB7DA133EEACB36634B05D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807181961299E3F894AAB8A4 /* Config.swift */; };
+		41B990901193A7C326CE3F04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF46FA1841B2476D924D21D2 /* Foundation.framework */; };
+		438E03DEA1A7E75727834902 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9510C1EAB141E56009B62D9 /* SignInView.swift */; };
+		4B7DA905489BF6EC9362399A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710A7AD7CBF9378B2E660371 /* Ingredient.swift */; };
+		513144935BB8043A6D335B20 /* AccountFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69F6B4EDF1D54775C16374 /* AccountFlowUITests.swift */; };
+		54263B358D56D89B3CCFD8B1 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4828A5EA1A33202EEE87ABD /* PrimaryButton.swift */; };
+		571DA84B433C76885F3FF041 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E9ADE7D1BF1C7B06330063 /* Endpoint.swift */; };
+		58C538E983A50318B8C81977 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC07327D4A849E7E9FCA97C /* ImagePicker.swift */; };
+		60ADE4BFB52EBE05A512AE8C /* ScanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D19E4A287210CF50DB761 /* ScanViewModelTests.swift */; };
+		6CB55FA791203B2152935632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86946FBAD780A85A14919088 /* Assets.xcassets */; };
+		6D086F59745AE3679ED6A088 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF46FA1841B2476D924D21D2 /* Foundation.framework */; };
+		7613C922EEC884F6A42094C5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F35931952FDCCD18E847C1 /* AppError.swift */; };
+		793AC7247602CD30E06A8183 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A1429F3E352F477FAB890 /* ScanView.swift */; };
+		7B8273B9C77F2A11016A333C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4AC0D800CB596B20D79F34 /* Colors.swift */; };
+		80F8DBBC130E87EF90BAC007 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911931E7D92449708E7BFEA6 /* RecipeDetailView.swift */; };
+		8116DD6E78B757E6E297EA2D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547C5F6B07B1CF8DDECDCE62 /* AccountView.swift */; };
+		8441D00C51F569B3E67D298E /* ResultsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FE02CF77A94AD5725D506 /* ResultsViewModelTests.swift */; };
+		8464CCBC0C157BC5219878F1 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B56FB5A524860CEA7A309C /* ErrorView.swift */; };
+		880E90B9A71465ECF4DC2081 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A02C60BA82AA9E54ABD9BE9 /* APIClientTests.swift */; };
+		89B5CF3F171D45BF419B1175 /* IngredientRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736563269424E3D9E43B5617 /* IngredientRow.swift */; };
+		8BBC8A510E6FB9365D64D524 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71222BA56B2BCB142943B2DC /* APIClient.swift */; };
+		8EA41C6A7E5A9121D51B98B9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323D188115DB748CB5CE358 /* AuthService.swift */; };
+		8EB8C314045E0AF7CA143E21 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45392296DC75A1520C4F74DB /* ResultsViewModel.swift */; };
+		92A8B7ABC3BADC050FD112F6 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672E52845F0A4E9B94AA6D81 /* Typography.swift */; };
+		938691221CBA34C06200506D /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BF8C28B8611FDF307F852 /* Recipe.swift */; };
+		9C457809B326A91B2312F8D6 /* ImageMetadataStripper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA07156373E2676AFC673577 /* ImageMetadataStripper.swift */; };
+		A2C93CF2AB64CCD8E8A95626 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B960912FEBCC756FDF7270 /* RecipeDetailViewModel.swift */; };
+		AA2FBBC2CC4628A093338993 /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE6478FC923A6012485CFC /* DeleteAccountUseCase.swift */; };
+		B3EEB78E3479CF20352F76AE /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFEE8BC85E0960333608259 /* KeychainHelper.swift */; };
+		D1666BADDF37B0675D5547A3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94428646ACD91C99A58BE09 /* AppState.swift */; };
+		DF207ACF90B70C0E69A81D3F /* RecipeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12A33EB48F74B02196516B9 /* RecipeModelTests.swift */; };
+		E05F6E88CFE5AF19E7953E7E /* ScanFridgeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FEC085F25510912513D449 /* ScanFridgeUseCaseTests.swift */; };
+		E499BDD4BDB346A11F34E08E /* ScanResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC877F7FD1DF1085299653A /* ScanResponse.swift */; };
+		E973553DE228CCC3BC9FA3DC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F307BE0996F0132B4D21DDE2 /* LoadingView.swift */; };
+		F00D3300F11CFF59CA45AED9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D470E6944059AED149922C5 /* AccountViewModel.swift */; };
+		F193C3CDAFB215F145DC00E7 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97ED18D894F5B10BB1DA412 /* AuthInterceptor.swift */; };
+		F56C0E7FEB405E6C3D8A61E4 /* ScanFridgeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A069407B6C744FF15ED9F50B /* ScanFridgeUseCase.swift */; };
+		F9487AE158C4C451EAB642A1 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B55C2D43E7B48BBFC1EBC19 /* APIError.swift */; };
+		FF47AC5E8B7AD453800B2C61 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F9236CACAF79059F96279 /* ResultsView.swift */; };
+		FFCFDBABF5CA0DBAF7F63DA2 /* ImageMetadataStripperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F03FCE3A0687118167E9D /* ImageMetadataStripperTests.swift */; };
+		FFE04ACEE9D40FC3036A4046 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF33AC5FCCE62FBED62E604 /* ScanViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		10A80D7F968C38919FF41656 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 822732CEC3913435983DB531 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 424868905E4BDED2FE47663E;
+			remoteInfo = Kiwi;
+		};
+		DC9D67E03A5820D50BF9A101 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 822732CEC3913435983DB531 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 424868905E4BDED2FE47663E;
+			remoteInfo = Kiwi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		088F9236CACAF79059F96279 /* ResultsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultsView.swift; path = Kiwi/Kiwi/Features/Results/ResultsView.swift; sourceTree = "<group>"; };
+		1A02C60BA82AA9E54ABD9BE9 /* APIClientTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClientTests.swift; path = Kiwi/KiwiTests/Data/APIClientTests.swift; sourceTree = "<group>"; };
+		245FA7910DED2492134EBD16 /* ClientRateLimiterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ClientRateLimiterTests.swift; path = Kiwi/KiwiTests/Data/ClientRateLimiterTests.swift; sourceTree = "<group>"; };
+		24B6C767615612CAB2D9F3E5 /* ClientRateLimiter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ClientRateLimiter.swift; path = Kiwi/Kiwi/Data/RateLimit/ClientRateLimiter.swift; sourceTree = "<group>"; };
+		264FE02CF77A94AD5725D506 /* ResultsViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultsViewModelTests.swift; path = Kiwi/KiwiTests/ViewModels/ResultsViewModelTests.swift; sourceTree = "<group>"; };
+		2D470E6944059AED149922C5 /* AccountViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccountViewModel.swift; path = Kiwi/Kiwi/Features/Account/AccountViewModel.swift; sourceTree = "<group>"; };
+		38E9ADE7D1BF1C7B06330063 /* Endpoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = Kiwi/Kiwi/Data/Network/Endpoint.swift; sourceTree = "<group>"; };
+		3DC07327D4A849E7E9FCA97C /* ImagePicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImagePicker.swift; path = Kiwi/Kiwi/Features/Scan/ImagePicker.swift; sourceTree = "<group>"; };
+		3E4A1429F3E352F477FAB890 /* ScanView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanView.swift; path = Kiwi/Kiwi/Features/Scan/ScanView.swift; sourceTree = "<group>"; };
+		45392296DC75A1520C4F74DB /* ResultsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultsViewModel.swift; path = Kiwi/Kiwi/Features/Results/ResultsViewModel.swift; sourceTree = "<group>"; };
+		4B55C2D43E7B48BBFC1EBC19 /* APIError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = Kiwi/Kiwi/Data/Network/APIError.swift; sourceTree = "<group>"; };
+		5323D188115DB748CB5CE358 /* AuthService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = Kiwi/Kiwi/Data/Auth/AuthService.swift; sourceTree = "<group>"; };
+		547C5F6B07B1CF8DDECDCE62 /* AccountView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccountView.swift; path = Kiwi/Kiwi/Features/Account/AccountView.swift; sourceTree = "<group>"; };
+		54AE6478FC923A6012485CFC /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeleteAccountUseCase.swift; path = Kiwi/Kiwi/Domain/UseCases/DeleteAccountUseCase.swift; sourceTree = "<group>"; };
+		672E52845F0A4E9B94AA6D81 /* Typography.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typography.swift; path = Kiwi/Kiwi/Shared/Theme/Typography.swift; sourceTree = "<group>"; };
+		701D19E4A287210CF50DB761 /* ScanViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanViewModelTests.swift; path = Kiwi/KiwiTests/ViewModels/ScanViewModelTests.swift; sourceTree = "<group>"; };
+		710A7AD7CBF9378B2E660371 /* Ingredient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ingredient.swift; path = Kiwi/Kiwi/Domain/Models/Ingredient.swift; sourceTree = "<group>"; };
+		71222BA56B2BCB142943B2DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = Kiwi/Kiwi/Data/Network/APIClient.swift; sourceTree = "<group>"; };
+		722BF8C28B8611FDF307F852 /* Recipe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = Kiwi/Kiwi/Domain/Models/Recipe.swift; sourceTree = "<group>"; };
+		72C7B8ED560CCE8C6CB12337 /* KiwiApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KiwiApp.swift; path = Kiwi/Kiwi/App/KiwiApp.swift; sourceTree = "<group>"; };
+		736563269424E3D9E43B5617 /* IngredientRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IngredientRow.swift; path = Kiwi/Kiwi/Features/Results/IngredientRow.swift; sourceTree = "<group>"; };
+		7A7EDCFD3A72978501B5F543 /* KiwiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F71D05BBE54F01AE5774013 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = Kiwi/Kiwi/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
+		807181961299E3F894AAB8A4 /* Config.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Kiwi/Kiwi/Data/Network/Config.swift; sourceTree = "<group>"; };
+		85B56FB5A524860CEA7A309C /* ErrorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = Kiwi/Kiwi/Shared/Components/ErrorView.swift; sourceTree = "<group>"; };
+		86946FBAD780A85A14919088 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Kiwi/Kiwi/Resources/Assets.xcassets; sourceTree = "<group>"; };
+		8C6F03FCE3A0687118167E9D /* ImageMetadataStripperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageMetadataStripperTests.swift; path = Kiwi/KiwiTests/Data/ImageMetadataStripperTests.swift; sourceTree = "<group>"; };
+		911931E7D92449708E7BFEA6 /* RecipeDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeDetailView.swift; path = Kiwi/Kiwi/Features/RecipeDetail/RecipeDetailView.swift; sourceTree = "<group>"; };
+		99FEC085F25510912513D449 /* ScanFridgeUseCaseTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanFridgeUseCaseTests.swift; path = Kiwi/KiwiTests/Domain/ScanFridgeUseCaseTests.swift; sourceTree = "<group>"; };
+		9D69F6B4EDF1D54775C16374 /* AccountFlowUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccountFlowUITests.swift; path = Kiwi/KiwiUITests/AccountFlowUITests.swift; sourceTree = "<group>"; };
+		A069407B6C744FF15ED9F50B /* ScanFridgeUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanFridgeUseCase.swift; path = Kiwi/Kiwi/Domain/UseCases/ScanFridgeUseCase.swift; sourceTree = "<group>"; };
+		A3B960912FEBCC756FDF7270 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeDetailViewModel.swift; path = Kiwi/Kiwi/Features/RecipeDetail/RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		A45B1E34BEB1F69DE5A6B01D /* QuotaInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuotaInfo.swift; path = Kiwi/Kiwi/Domain/Models/QuotaInfo.swift; sourceTree = "<group>"; };
+		A4828A5EA1A33202EEE87ABD /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButton.swift; path = Kiwi/Kiwi/Shared/Components/PrimaryButton.swift; sourceTree = "<group>"; };
+		A94428646ACD91C99A58BE09 /* AppState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppState.swift; path = Kiwi/Kiwi/App/AppState.swift; sourceTree = "<group>"; };
+		CDFEE8BC85E0960333608259 /* KeychainHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = Kiwi/Kiwi/Data/Auth/KeychainHelper.swift; sourceTree = "<group>"; };
+		CF39AA122684CCAF2F51C337 /* ScanFlowUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanFlowUITests.swift; path = Kiwi/KiwiUITests/ScanFlowUITests.swift; sourceTree = "<group>"; };
+		D854B043BFE3136D415E11CF /* AccountViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccountViewModelTests.swift; path = Kiwi/KiwiTests/ViewModels/AccountViewModelTests.swift; sourceTree = "<group>"; };
+		D9510C1EAB141E56009B62D9 /* SignInView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignInView.swift; path = Kiwi/Kiwi/Features/Account/SignInView.swift; sourceTree = "<group>"; };
+		D9F35931952FDCCD18E847C1 /* AppError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppError.swift; path = Kiwi/Kiwi/Shared/Extensions/AppError.swift; sourceTree = "<group>"; };
+		DDF33AC5FCCE62FBED62E604 /* ScanViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanViewModel.swift; path = Kiwi/Kiwi/Features/Scan/ScanViewModel.swift; sourceTree = "<group>"; };
+		E277996D55E8D4DD2C038266 /* KiwiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97ED18D894F5B10BB1DA412 /* AuthInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthInterceptor.swift; path = Kiwi/Kiwi/Data/Network/AuthInterceptor.swift; sourceTree = "<group>"; };
+		EA07156373E2676AFC673577 /* ImageMetadataStripper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageMetadataStripper.swift; path = Kiwi/Kiwi/Data/ImageProcessing/ImageMetadataStripper.swift; sourceTree = "<group>"; };
+		EF46FA1841B2476D924D21D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F12A33EB48F74B02196516B9 /* RecipeModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeModelTests.swift; path = Kiwi/KiwiTests/Domain/RecipeModelTests.swift; sourceTree = "<group>"; };
+		F307BE0996F0132B4D21DDE2 /* LoadingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = Kiwi/Kiwi/Shared/Components/LoadingView.swift; sourceTree = "<group>"; };
+		F671404E49AC9E167331004F /* GetQuotaUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GetQuotaUseCase.swift; path = Kiwi/Kiwi/Domain/UseCases/GetQuotaUseCase.swift; sourceTree = "<group>"; };
+		F6F055D48BA5C62F225CF2E1 /* Kiwi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiwi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC877F7FD1DF1085299653A /* ScanResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScanResponse.swift; path = Kiwi/Kiwi/Domain/Models/ScanResponse.swift; sourceTree = "<group>"; };
+		FD4AC0D800CB596B20D79F34 /* Colors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Kiwi/Kiwi/Shared/Theme/Colors.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BAD505685167AA7310AC956 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3518D070B525C554C1B1F27D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F43D6CEEBFCAF7715F39F562 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D086F59745AE3679ED6A088 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE90ED92D74AB4B1E1EDABBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41B990901193A7C326CE3F04 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BF4873DFA01DACF6614C75F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F7140E3F9D6F762F736563A /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F7140E3F9D6F762F736563A /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EF46FA1841B2476D924D21D2 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7CE25D573A897DA3E3A44534 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F6F055D48BA5C62F225CF2E1 /* Kiwi.app */,
+				E277996D55E8D4DD2C038266 /* KiwiTests.xctest */,
+				7A7EDCFD3A72978501B5F543 /* KiwiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE9DB280A0C5FEAD43470448 = {
+			isa = PBXGroup;
+			children = (
+				7CE25D573A897DA3E3A44534 /* Products */,
+				3BF4873DFA01DACF6614C75F /* Frameworks */,
+				A94428646ACD91C99A58BE09 /* AppState.swift */,
+				72C7B8ED560CCE8C6CB12337 /* KiwiApp.swift */,
+				5323D188115DB748CB5CE358 /* AuthService.swift */,
+				CDFEE8BC85E0960333608259 /* KeychainHelper.swift */,
+				EA07156373E2676AFC673577 /* ImageMetadataStripper.swift */,
+				71222BA56B2BCB142943B2DC /* APIClient.swift */,
+				4B55C2D43E7B48BBFC1EBC19 /* APIError.swift */,
+				E97ED18D894F5B10BB1DA412 /* AuthInterceptor.swift */,
+				807181961299E3F894AAB8A4 /* Config.swift */,
+				38E9ADE7D1BF1C7B06330063 /* Endpoint.swift */,
+				24B6C767615612CAB2D9F3E5 /* ClientRateLimiter.swift */,
+				710A7AD7CBF9378B2E660371 /* Ingredient.swift */,
+				A45B1E34BEB1F69DE5A6B01D /* QuotaInfo.swift */,
+				722BF8C28B8611FDF307F852 /* Recipe.swift */,
+				FAC877F7FD1DF1085299653A /* ScanResponse.swift */,
+				54AE6478FC923A6012485CFC /* DeleteAccountUseCase.swift */,
+				F671404E49AC9E167331004F /* GetQuotaUseCase.swift */,
+				A069407B6C744FF15ED9F50B /* ScanFridgeUseCase.swift */,
+				547C5F6B07B1CF8DDECDCE62 /* AccountView.swift */,
+				2D470E6944059AED149922C5 /* AccountViewModel.swift */,
+				D9510C1EAB141E56009B62D9 /* SignInView.swift */,
+				911931E7D92449708E7BFEA6 /* RecipeDetailView.swift */,
+				A3B960912FEBCC756FDF7270 /* RecipeDetailViewModel.swift */,
+				736563269424E3D9E43B5617 /* IngredientRow.swift */,
+				088F9236CACAF79059F96279 /* ResultsView.swift */,
+				45392296DC75A1520C4F74DB /* ResultsViewModel.swift */,
+				3DC07327D4A849E7E9FCA97C /* ImagePicker.swift */,
+				3E4A1429F3E352F477FAB890 /* ScanView.swift */,
+				DDF33AC5FCCE62FBED62E604 /* ScanViewModel.swift */,
+				85B56FB5A524860CEA7A309C /* ErrorView.swift */,
+				F307BE0996F0132B4D21DDE2 /* LoadingView.swift */,
+				A4828A5EA1A33202EEE87ABD /* PrimaryButton.swift */,
+				D9F35931952FDCCD18E847C1 /* AppError.swift */,
+				FD4AC0D800CB596B20D79F34 /* Colors.swift */,
+				672E52845F0A4E9B94AA6D81 /* Typography.swift */,
+				86946FBAD780A85A14919088 /* Assets.xcassets */,
+				7F71D05BBE54F01AE5774013 /* Localizable.xcstrings */,
+				1A02C60BA82AA9E54ABD9BE9 /* APIClientTests.swift */,
+				245FA7910DED2492134EBD16 /* ClientRateLimiterTests.swift */,
+				8C6F03FCE3A0687118167E9D /* ImageMetadataStripperTests.swift */,
+				F12A33EB48F74B02196516B9 /* RecipeModelTests.swift */,
+				99FEC085F25510912513D449 /* ScanFridgeUseCaseTests.swift */,
+				D854B043BFE3136D415E11CF /* AccountViewModelTests.swift */,
+				264FE02CF77A94AD5725D506 /* ResultsViewModelTests.swift */,
+				701D19E4A287210CF50DB761 /* ScanViewModelTests.swift */,
+				9D69F6B4EDF1D54775C16374 /* AccountFlowUITests.swift */,
+				CF39AA122684CCAF2F51C337 /* ScanFlowUITests.swift */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		424868905E4BDED2FE47663E /* Kiwi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D601EE6746174F58D96F85B9 /* Build configuration list for PBXNativeTarget "Kiwi" */;
+			buildPhases = (
+				F6D78F508F7FCEA49DFAFEA9 /* Sources */,
+				F43D6CEEBFCAF7715F39F562 /* Frameworks */,
+				6FDDC813A6A249069442B390 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kiwi;
+			productName = Kiwi;
+			productReference = F6F055D48BA5C62F225CF2E1 /* Kiwi.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C04D10E3C947183B4B89F1B1 /* KiwiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65760AE642A25B003FB2CBF5 /* Build configuration list for PBXNativeTarget "KiwiTests" */;
+			buildPhases = (
+				B4C6CB643F9B16A5B9339AED /* Sources */,
+				9BAD505685167AA7310AC956 /* Frameworks */,
+				FDDD0BAB800217F45D715C5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C80AF951ACEF2B3AF1A7F4AF /* PBXTargetDependency */,
+			);
+			name = KiwiTests;
+			productName = KiwiTests;
+			productReference = E277996D55E8D4DD2C038266 /* KiwiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E48DD4A20D24E96FFE3C2095 /* KiwiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0804A2EC9B638C8C564F9BF9 /* Build configuration list for PBXNativeTarget "KiwiUITests" */;
+			buildPhases = (
+				D0C9BB521094BB9F11D62E42 /* Sources */,
+				FE90ED92D74AB4B1E1EDABBA /* Frameworks */,
+				992D89FEBCE957CD4581467A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				46E800E01CC678B17A14135E /* PBXTargetDependency */,
+			);
+			name = KiwiUITests;
+			productName = KiwiUITests;
+			productReference = 7A7EDCFD3A72978501B5F543 /* KiwiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		822732CEC3913435983DB531 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					424868905E4BDED2FE47663E = {
+						DevelopmentTeam = 2SF3B828QJ;
+						ProvisioningStyle = Automatic;
+					};
+					C04D10E3C947183B4B89F1B1 = {
+						ProvisioningStyle = Automatic;
+					};
+					E48DD4A20D24E96FFE3C2095 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DDDB3B304951DC14592F38A2 /* Build configuration list for PBXProject "Kiwi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE9DB280A0C5FEAD43470448;
+			productRefGroup = 7CE25D573A897DA3E3A44534 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				424868905E4BDED2FE47663E /* Kiwi */,
+				C04D10E3C947183B4B89F1B1 /* KiwiTests */,
+				E48DD4A20D24E96FFE3C2095 /* KiwiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6FDDC813A6A249069442B390 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB55FA791203B2152935632 /* Assets.xcassets in Resources */,
+				122AFEEAC6479944BBC61072 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		992D89FEBCE957CD4581467A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDDD0BAB800217F45D715C5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B4C6CB643F9B16A5B9339AED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				880E90B9A71465ECF4DC2081 /* APIClientTests.swift in Sources */,
+				3A99D00FE5434C9479920939 /* ClientRateLimiterTests.swift in Sources */,
+				FFCFDBABF5CA0DBAF7F63DA2 /* ImageMetadataStripperTests.swift in Sources */,
+				DF207ACF90B70C0E69A81D3F /* RecipeModelTests.swift in Sources */,
+				E05F6E88CFE5AF19E7953E7E /* ScanFridgeUseCaseTests.swift in Sources */,
+				072ED2F9925A2F6C9D4E9E8A /* AccountViewModelTests.swift in Sources */,
+				8441D00C51F569B3E67D298E /* ResultsViewModelTests.swift in Sources */,
+				60ADE4BFB52EBE05A512AE8C /* ScanViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C9BB521094BB9F11D62E42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				513144935BB8043A6D335B20 /* AccountFlowUITests.swift in Sources */,
+				3286375030B0A6C75C4CA2E9 /* ScanFlowUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6D78F508F7FCEA49DFAFEA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1666BADDF37B0675D5547A3 /* AppState.swift in Sources */,
+				3419A7DC843457D8ED949559 /* KiwiApp.swift in Sources */,
+				8EA41C6A7E5A9121D51B98B9 /* AuthService.swift in Sources */,
+				B3EEB78E3479CF20352F76AE /* KeychainHelper.swift in Sources */,
+				9C457809B326A91B2312F8D6 /* ImageMetadataStripper.swift in Sources */,
+				8BBC8A510E6FB9365D64D524 /* APIClient.swift in Sources */,
+				F9487AE158C4C451EAB642A1 /* APIError.swift in Sources */,
+				F193C3CDAFB215F145DC00E7 /* AuthInterceptor.swift in Sources */,
+				3AEB7DA133EEACB36634B05D /* Config.swift in Sources */,
+				571DA84B433C76885F3FF041 /* Endpoint.swift in Sources */,
+				2162FA066EE10E6DE82A81CF /* ClientRateLimiter.swift in Sources */,
+				4B7DA905489BF6EC9362399A /* Ingredient.swift in Sources */,
+				07955D2DC5078367BFB0C696 /* QuotaInfo.swift in Sources */,
+				938691221CBA34C06200506D /* Recipe.swift in Sources */,
+				E499BDD4BDB346A11F34E08E /* ScanResponse.swift in Sources */,
+				AA2FBBC2CC4628A093338993 /* DeleteAccountUseCase.swift in Sources */,
+				05618296E769E6B3B575357C /* GetQuotaUseCase.swift in Sources */,
+				F56C0E7FEB405E6C3D8A61E4 /* ScanFridgeUseCase.swift in Sources */,
+				8116DD6E78B757E6E297EA2D /* AccountView.swift in Sources */,
+				F00D3300F11CFF59CA45AED9 /* AccountViewModel.swift in Sources */,
+				438E03DEA1A7E75727834902 /* SignInView.swift in Sources */,
+				80F8DBBC130E87EF90BAC007 /* RecipeDetailView.swift in Sources */,
+				A2C93CF2AB64CCD8E8A95626 /* RecipeDetailViewModel.swift in Sources */,
+				89B5CF3F171D45BF419B1175 /* IngredientRow.swift in Sources */,
+				FF47AC5E8B7AD453800B2C61 /* ResultsView.swift in Sources */,
+				8EB8C314045E0AF7CA143E21 /* ResultsViewModel.swift in Sources */,
+				58C538E983A50318B8C81977 /* ImagePicker.swift in Sources */,
+				793AC7247602CD30E06A8183 /* ScanView.swift in Sources */,
+				FFE04ACEE9D40FC3036A4046 /* ScanViewModel.swift in Sources */,
+				8464CCBC0C157BC5219878F1 /* ErrorView.swift in Sources */,
+				E973553DE228CCC3BC9FA3DC /* LoadingView.swift in Sources */,
+				54263B358D56D89B3CCFD8B1 /* PrimaryButton.swift in Sources */,
+				7613C922EEC884F6A42094C5 /* AppError.swift in Sources */,
+				7B8273B9C77F2A11016A333C /* Colors.swift in Sources */,
+				92A8B7ABC3BADC050FD112F6 /* Typography.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		46E800E01CC678B17A14135E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Kiwi;
+			target = 424868905E4BDED2FE47663E /* Kiwi */;
+			targetProxy = 10A80D7F968C38919FF41656 /* PBXContainerItemProxy */;
+		};
+		C80AF951ACEF2B3AF1A7F4AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Kiwi;
+			target = 424868905E4BDED2FE47663E /* Kiwi */;
+			targetProxy = DC9D67E03A5820D50BF9A101 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02200DF2AA5A9BB348F78062 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = KiwiAccent;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2SF3B828QJ;
+				ENABLE_TESTABILITY = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Kiwi/Kiwi/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		282A1985F026FBE82183D5B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5EF9B6C4A76A5ACDB23CCC75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.uitests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kiwi;
+			};
+			name = Debug;
+		};
+		7DD6A5E2E5EEA54832D930F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.tests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiwi.app/Kiwi";
+				TEST_TARGET_NAME = Kiwi;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		917BCA8481CE4A272496E2FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.uitests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Kiwi;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B1C3CB59B0F544D07456C343 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app.tests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiwi.app/Kiwi";
+				TEST_TARGET_NAME = Kiwi;
+			};
+			name = Debug;
+		};
+		D3D7E959FFDADF62621F3B75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F8681222CDB986D1677E4027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = KiwiAccent;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2SF3B828QJ;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Kiwi/Kiwi/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwi.app;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0804A2EC9B638C8C564F9BF9 /* Build configuration list for PBXNativeTarget "KiwiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				917BCA8481CE4A272496E2FB /* Release */,
+				5EF9B6C4A76A5ACDB23CCC75 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65760AE642A25B003FB2CBF5 /* Build configuration list for PBXNativeTarget "KiwiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DD6A5E2E5EEA54832D930F7 /* Release */,
+				B1C3CB59B0F544D07456C343 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D601EE6746174F58D96F85B9 /* Build configuration list for PBXNativeTarget "Kiwi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02200DF2AA5A9BB348F78062 /* Release */,
+				F8681222CDB986D1677E4027 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDDB3B304951DC14592F38A2 /* Build configuration list for PBXProject "Kiwi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				282A1985F026FBE82183D5B1 /* Debug */,
+				D3D7E959FFDADF62621F3B75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 822732CEC3913435983DB531 /* Project object */;
+}
