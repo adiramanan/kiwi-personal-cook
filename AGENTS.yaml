@@ -1,0 +1,475 @@
+# =============================================================================
+# AGENTS.yaml — Kiwi
+# =============================================================================
+# This file defines the operating contract for coding agents working in the
+# Kiwi monorepo. It is a YAML equivalent of AGENTS.md for structured,
+# machine-efficient parsing.
+#
+# Kiwi is a personal chef / cooking assistant that helps people cook healthier
+# meals using what's already in their fridge, reducing reliance on takeout and
+# restaurants.
+# =============================================================================
+
+project:
+  name: Kiwi
+  type: monorepo
+  description: >
+    Personal chef / cooking assistant that helps people cook healthier meals
+    using what's already in their fridge, reducing reliance on takeout and
+    restaurants.
+
+# ---------------------------------------------------------------------------
+# 1) Scope
+# ---------------------------------------------------------------------------
+scope:
+  in_scope:
+    - Accept a fridge image as the primary input.
+    - Identify ingredients present in the image.
+    - description: Generate recipe recommendations that
+      details:
+        - Prefer using detected ingredients.
+        - Allow minor substitutions.
+        - Are optimized for fast, low-effort cooking.
+    - Support the user account lifecycle (Sign in, Settings, Delete account).
+
+  out_of_scope:
+    hard_boundary: >
+      Kiwi must only provide cooking-related assistance and meal
+      recommendations.
+    prohibited:
+      - No unrelated assistant behavior.
+      - No browsing the user's personal data.
+      - No "general chatbot" features.
+    fallback: >
+      If a feature request is not directly tied to cooking guidance, ingredient
+      detection, recipe suggestion, or app usability/privacy, treat it as
+      out-of-scope and request explicit human direction.
+
+# ---------------------------------------------------------------------------
+# 2) Agent role, authority, and guardrails
+# ---------------------------------------------------------------------------
+agent:
+  governs: coding agent
+
+  allowed_actions:
+    - Modify code in-repo.
+    - Add or update tests.
+    - Run tests.
+    - Update documentation (including this file) when behavior or commands change.
+
+  forbidden_actions:
+    - No deployments to any environment.
+    - No infrastructure changes without explicit human approval.
+    - No deletions (code/files/resources/data/logs) without explicit human approval.
+    - No breaking changes (API, data models, core UX flows) without explicit human approval.
+
+  require_approval:
+    - Any action that could be considered a breaking change.
+    - Any deletion.
+    - Any refactor affecting multiple features/modules.
+    - Any change to auth, data retention, logging, privacy posture, rate limits, or LLM prompts/policies.
+    - Any new third-party SDK or service integration.
+    - Any network access required by the agent's sandboxed environment.
+
+  ambiguity_handling:
+    - Ask a concise clarifying question.
+    - Prefer correctness over speed for anything security/privacy/auth/data related.
+    - If instructions conflict, ask for resolution before proceeding.
+
+# ---------------------------------------------------------------------------
+# 3) Repo structure and instruction precedence
+# ---------------------------------------------------------------------------
+repo_structure:
+  type: monorepo
+  layout:
+    - path: /AGENTS.md
+      purpose: Repo-wide rules (this file)
+    - path: /AGENTS.yaml
+      purpose: Repo-wide rules (YAML equivalent)
+    - path: /apps/ios/AGENTS.md
+      purpose: iOS-specific commands, schemes, snapshot rules
+    - path: /services/api/AGENTS.md
+      purpose: Backend/API-specific rules
+    - path: /packages/shared/AGENTS.md
+      purpose: Shared code rules
+  precedence_rule: >
+    The agent should follow the closest AGENTS.md (or AGENTS.yaml) in the
+    directory tree, with the root file providing baseline guardrails.
+
+# ---------------------------------------------------------------------------
+# 4) Product quality bar
+# ---------------------------------------------------------------------------
+quality:
+  target: Apple Design Awards candidate
+  non_negotiables:
+    - Platform-native UX and interaction polish.
+    - Accessibility (Dynamic Type, VoiceOver, contrast, touch target sizing).
+    - Performance (no main-thread blocking for image processing / networking).
+    - Privacy-first UX (permission discipline, clear disclosures).
+
+# ---------------------------------------------------------------------------
+# 5) Technical architecture (recommended)
+# ---------------------------------------------------------------------------
+architecture:
+  goals:
+    - SwiftUI-first, testable, scalable.
+    - Clear boundaries between UI state, business logic, and side effects (networking, storage, logging).
+    - Safe evolution for a fast-moving product without collapsing into "giant view model" complexity.
+
+  approach:
+    name: Feature-first modular MVVM with a light Clean-Architecture boundary
+    layers:
+      feature_modules:
+        description: Organize by user-facing capability.
+        examples:
+          - Scan
+          - Results
+          - Recipe Detail
+          - Account/Settings
+      mvvm:
+        description: MVVM for SwiftUI
+        details:
+          - Views are declarative and minimal.
+          - ViewModels own screen state + orchestration.
+      domain:
+        description: Domain/use-case layer
+        details:
+          - Pure logic for ranking recipes, applying substitutions, dietary preferences (if/when added).
+      data:
+        description: Data layer
+        details:
+          - Networking, auth, rate limiting, and the LLM gateway client.
+      state_management:
+        description: State management
+        details:
+          - Prefer native SwiftUI state and modern observable models (iOS 26+ target).
+
+  rationale:
+    - Aligns naturally with SwiftUI's data-driven UI.
+    - Keeps business rules independent of UI so testing is reliable.
+    - Enables high UX polish with snapshot + UI tests protecting the design bar.
+
+# ---------------------------------------------------------------------------
+# 6) Platform + toolchain
+# ---------------------------------------------------------------------------
+platform:
+  os: iOS
+  minimum_deployment_target: iOS 26.x
+  ui_framework: SwiftUI
+  dependency_management: Swift Package Manager (SPM)
+  concurrency: >
+    Prefer structured concurrency (async/await) and avoid callback pyramids.
+
+# ---------------------------------------------------------------------------
+# 7) Build, test, and CI expectations
+# ---------------------------------------------------------------------------
+build_and_ci:
+  canonical_commands:
+    note: >
+      Keep these commands accurate. If they change, update this file in the
+      same PR. Replace placeholders once the repo is initialized.
+    build_debug: >
+      xcodebuild
+      -project apps/ios/Kiwi.xcodeproj
+      -scheme Kiwi
+      -configuration Debug
+      -destination "generic/platform=iOS Simulator"
+      build
+    unit_and_ui_tests: >
+      xcodebuild
+      -project apps/ios/Kiwi.xcodeproj
+      -scheme Kiwi
+      -destination "generic/platform=iOS Simulator"
+      test
+    spm_packages: swift test
+
+  testing_requirements:
+    mandatory: true
+    per_feature:
+      unit_tests:
+        - Domain/use-cases
+        - Data/services
+        - ViewModels
+      ui_tests:
+        - Primary happy paths
+        - Critical error states (network failure, rate limit exceeded)
+      snapshot_tests:
+        - Key SwiftUI views and states
+    fallback: >
+      If a test cannot be added, document why in the PR and propose an
+      alternative.
+
+  ci_quality_gates:
+    - Build passes.
+    - Unit/UI/snapshot tests pass.
+    - No secrets committed.
+    - No unauthenticated endpoints.
+    - Lint/format checks pass (if configured).
+
+# ---------------------------------------------------------------------------
+# 8) Security, privacy, and AI safety
+# ---------------------------------------------------------------------------
+security:
+  threat_model: high risk
+  threat_reasons:
+    - Untrusted image input (home environment content).
+    - Third-party AI processing.
+    - LLM prompt injection and insecure output handling risks.
+
+  auth:
+    provider: Sign in with Apple (v1)
+    rules:
+      - All network calls require auth (including read-only).
+    zero_trust:
+      - Treat every request as untrusted at the server boundary.
+      - Enforce authorization and rate limits server-side.
+
+  rate_limiting:
+    target: 3–4 fridge image uploads per user per day
+    enforcement:
+      server: authoritative
+      client: mirrors the rule for better UX
+    when_exceeded: Hard stop (free tier), with a user-friendly explanation.
+
+  image_handling:
+    non_negotiable: true
+    rules:
+      processing:
+        - Images are processed and discarded.
+        - No persistent storage on Kiwi servers.
+        - On-device storage limited to OS-controlled photo picker/camera flows.
+      metadata_stripping:
+        - Remove EXIF/location/capture metadata.
+        - Re-encode to a "visual-only" payload.
+      user_disclosure:
+        - Images are deleted after processing.
+
+  llm_integration:
+    provider_count: Single LLM provider for v1
+    future: Optional abstraction layer (only with explicit approval)
+    output_handling:
+      mandatory: true
+      rules:
+        - Model output is untrusted until validated.
+        - Require structured output (e.g., strict JSON schema) and validate deterministically.
+      never_allow_model_output_to:
+        - Trigger tool calls
+        - Execute code
+        - Perform network requests
+        - Write files
+    prompt_injection_defense:
+      - Treat any text extracted from images as untrusted.
+      - Keep system prompts narrowly scoped to cooking assistance.
+      - Refuse out-of-scope requests.
+
+  logging_and_telemetry:
+    - Prompts and responses may be logged only with anonymization/pseudonymization.
+    - Log access must be least privilege and auditable.
+    - "Crash logging: local only for now (no third-party crash reporting until approved)."
+
+  data_deletion:
+    - Users must be able to delete their account from within the app.
+    - Deletion must remove the user account record and associated stored data.
+    - >
+      Any stored prompt/response logs associated with that user must be deleted
+      (unless a legal retention requirement applies).
+
+  secrets:
+    - Never commit secrets.
+    - Use secure secret injection for CI and local dev.
+    - Prefer short-lived tokens.
+
+# ---------------------------------------------------------------------------
+# 9) UX + interaction requirements
+# ---------------------------------------------------------------------------
+ux:
+  core_flows:
+    scan:
+      - Minimal steps from launch to image capture/pick to results.
+      - Clear progress and error states.
+    results:
+      - Show detected ingredients.
+      - Allow quick edits (confirm/remove ingredients).
+      - Provide 2–4 high-quality recipe options.
+    recipe_detail:
+      - Clear steps.
+      - Ingredients used vs missing.
+      - Substitution suggestions.
+      - '"Make it faster" tip.'
+
+  accessibility:
+    - Dynamic Type support.
+    - VoiceOver labels and logical navigation order.
+    - High-contrast, readable text.
+    - Large, tappable controls.
+
+# ---------------------------------------------------------------------------
+# 10) Deployment environments and human-only release process
+# ---------------------------------------------------------------------------
+deployment:
+  environments:
+    - name: Local / sandbox
+      description: Developer device and simulator testing.
+    - name: Staging / internal
+      description: Internal builds (e.g., TestFlight internal testing) with staging backend.
+    - name: Production
+      description: App Store release + production backend.
+
+  rules:
+    - The agent never deploys.
+    - description: Human-triggered deployments typically occur via
+      methods:
+        - CI pipelines (manual approvals)
+        - App Store Connect / TestFlight submission steps
+        - Infrastructure change management workflows
+
+  release_docs: /docs/release.md
+
+# ---------------------------------------------------------------------------
+# 11) Change management
+# ---------------------------------------------------------------------------
+change_management:
+  - Prefer small, incremental PRs.
+  - Large cohesive changes may be one PR, but only with explicit approval.
+  - The agent may suggest refactors, but must not perform large refactors without approval.
+  - Update documentation whenever behavior changes.
+  - Update this file whenever commands, structure, or non-negotiable policies change.
+
+# ---------------------------------------------------------------------------
+# 12) Backend/API (recommended baseline)
+# ---------------------------------------------------------------------------
+backend:
+  description: >
+    iOS client plus a small backend that verifies Sign in with Apple identity,
+    enforces rate limits and abuse prevention, proxies calls to the LLM
+    provider, and stores only what is necessary (account, quota counters,
+    anonymized logs).
+
+  components:
+    ios_app:
+      framework: SwiftUI
+      responsibilities:
+        - Captures/selects image
+        - Strips metadata + compresses
+        - Calls Kiwi API with auth
+        - Renders ingredient list + recipes
+    kiwi_api:
+      responsibilities:
+        - Auth verification (Apple)
+        - Rate limiting (per user/day)
+        - Image size/type validation
+        - LLM request construction
+        - Structured response validation
+        - Logging (anonymized)
+    llm_provider:
+      responsibilities:
+        - Receives image (or extracted ingredient candidates)
+        - Returns structured recipes
+
+  api_principles:
+    - Auth required everywhere.
+    - Use explicit API versioning (e.g., /v1/...).
+    - Prefer small, explicit endpoints.
+    - Treat all input as untrusted; validate and normalize.
+
+  endpoints_v1:
+    - method: POST
+      path: /v1/scan
+      input: Image payload (+ optional user-supplied preferences)
+      output: Detected ingredients + recipe options
+    - method: GET
+      path: /v1/quota
+      output: Remaining image uploads for the day
+    - method: DELETE
+      path: /v1/account
+      output: Deletion confirmation (async completion allowed)
+
+  auth_approach_v1:
+    flow:
+      - Client obtains Sign in with Apple identity token.
+      - Server verifies the token with Apple and issues a session token.
+      - Session token used for subsequent calls.
+    notes:
+      - Do not rely solely on client enforcement.
+      - Treat user identifiers as pseudonymous; avoid collecting unnecessary PII.
+
+# ---------------------------------------------------------------------------
+# 13) Coding standards and repo hygiene
+# ---------------------------------------------------------------------------
+coding_standards:
+  swift:
+    - Prefer readability over cleverness.
+    - Keep views small; extract subviews.
+    - Keep ViewModels focused on a single screen.
+    - Avoid singletons; use dependency injection.
+    - Use structured concurrency; avoid Task {} in view bodies unless carefully scoped.
+
+  error_handling:
+    - All network calls must have typed error paths.
+    - ui_must_handle:
+        - No network
+        - Server errors
+        - Rate limit exceeded
+        - Invalid/partial model output
+        - Cancelation
+
+  dependencies:
+    - Use SPM.
+    - Add third-party packages only with explicit approval.
+    - Pin versions and document why each dependency exists.
+
+  linting:
+    recommendation: If adopted, keep it consistent and automatic in CI.
+    common_choices:
+      - SwiftFormat (formatting)
+      - SwiftLint (lint)
+
+# ---------------------------------------------------------------------------
+# 14) Observability (privacy-preserving)
+# ---------------------------------------------------------------------------
+observability:
+  what_to_log:
+    - Request IDs, timestamps, latency, status codes.
+    - Rate limit events.
+    - Validation failures (schema mismatches, parsing errors).
+
+  what_not_to_log:
+    - Raw images.
+    - EXIF/location metadata.
+    - Full user identifiers when pseudonyms suffice.
+
+  redaction:
+    - Redact any user-entered free text if/when it exists.
+    - Prefer structured logs with explicit fields.
+
+# ---------------------------------------------------------------------------
+# 15) Security testing and verification
+# ---------------------------------------------------------------------------
+security_testing:
+  minimum_expectations:
+    applies_to: Changes touching auth/network/LLM
+    tests:
+      - Unit tests for validation logic (schema, size/type checks).
+      - Negative tests for unauthenticated access.
+      - Rate limit tests (server-side).
+      - Snapshot/UI tests for error states.
+
+  recommended_tooling:
+    note: Add only with approval.
+    tools:
+      - Dependency vulnerability scanning.
+      - Secret scanning.
+      - Static analysis for Swift and server code.
+
+# ---------------------------------------------------------------------------
+# 16) PR checklist (agent must follow)
+# ---------------------------------------------------------------------------
+pr_checklist:
+  - No deletions without explicit approval.
+  - No breaking changes without explicit approval.
+  - Build passes locally (or in CI).
+  - Unit tests added/updated.
+  - UI/snapshot tests added/updated for user-visible changes.
+  - "Privacy checks: no image storage, metadata stripped."
+  - "Security checks: auth on all calls, input validated."
+  - Docs updated (including this file if behavior/commands changed).
