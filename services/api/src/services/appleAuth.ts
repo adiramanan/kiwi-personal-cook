@@ -22,10 +22,7 @@ export async function verifyAppleToken(
   identityToken: string,
   clientId: string
 ): Promise<AppleTokenPayload> {
-  const tokenBytes = Buffer.from(identityToken, "base64");
-  const tokenString = tokenBytes.toString("utf-8");
-
-  const { payload } = await jose.jwtVerify(tokenString, getJWKS(), {
+  const { payload } = await jose.jwtVerify(identityToken, getJWKS(), {
     issuer: APPLE_ISSUER,
     audience: clientId,
   });
