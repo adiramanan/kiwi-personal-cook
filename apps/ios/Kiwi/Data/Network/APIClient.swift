@@ -196,7 +196,7 @@ enum Config {
         #if DEBUG
         return (URL(string: "http://192.168.0.120:3000")!, .debugFallback)
         #else
-        return (URL(string: "https://api.kiwi.example.com")!, .releaseFallback)
+        return (URL(string: "https://kiwi-personal-cook-production.up.railway.app")!, .releaseFallback)
         #endif
     }()
 

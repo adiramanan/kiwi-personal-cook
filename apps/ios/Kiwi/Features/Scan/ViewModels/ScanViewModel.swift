@@ -13,7 +13,12 @@ final class ScanViewModel {
     private let rateLimiter = ClientRateLimiter()
 
     var canScan: Bool {
-        rateLimiter.canScan() && (quota?.remaining ?? 1) > 0
+        if let quota {
+            // Server quota is authoritative when available
+            return quota.remaining > 0
+        }
+        // Fall back to client-side limiter only when offline / API unreachable
+        return rateLimiter.canScan()
     }
 
     var remainingScans: Int {

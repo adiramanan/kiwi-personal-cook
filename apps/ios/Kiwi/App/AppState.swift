@@ -4,15 +4,26 @@ import AuthenticationServices
 @Observable
 final class AppState {
     var isAuthenticated: Bool = false
+    var isLoading: Bool = true
     var sessionToken: String?
     var signInError: String?
     var isSigningIn: Bool = false
 
     init() {
-        if let token = KeychainHelper.getToken() {
+        // Auth check happens asynchronously in checkAuth() to avoid
+        // blocking the main thread with a synchronous Keychain read.
+    }
+
+    func checkAuth() async {
+        let token = await Task.detached(priority: .userInitiated) {
+            KeychainHelper.getToken()
+        }.value
+
+        if let token {
             sessionToken = token
             isAuthenticated = true
         }
+        isLoading = false
     }
 
     func signIn(identityToken: Data) async {

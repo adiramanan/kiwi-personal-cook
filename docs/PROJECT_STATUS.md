@@ -4,8 +4,8 @@
 
 | Metric | Value |
 | ------ | ----- |
-| **Completion** | ~88% (iOS app + backend API) |
-| **Top blockers** | Deployment infrastructure, backend config consistency, launch polish |
+| **Completion** | ~95% (iOS app + backend API + deployed infrastructure) |
+| **Top blockers** | App Store prep, UI polish, test coverage |
 | **Key decisions** | See [Key Decisions (Updated 2026-02-22)](#key-decisions-updated-2026-02-22) below |
 
 **Agent update rule:** When any agent completes (or materially changes) a roadmap step, it must update this document in the same change set.
@@ -242,7 +242,7 @@ graph TD
 - API: Lint + typecheck + test on every PR
 - Quality gates: no secrets committed, all tests pass, build succeeds
 
-- [ ] Infrastructure: Set up PostgreSQL hosting, deploy backend API, configure CI/CD
+- [x] Infrastructure: PostgreSQL hosted on Railway, API deployed at `kiwi-personal-cook-production.up.railway.app`, DB migrations run on startup
 
 ### Phase 5: Pre-Launch — Low Priority Until Above Complete (Not Started)
 
