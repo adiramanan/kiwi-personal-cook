@@ -40,7 +40,7 @@ export async function analyzeImage(
   imageData: Buffer,
   apiKey: string
 ): Promise<ScanResponseType> {
-  const client = new OpenAI({ apiKey });
+  const client = new OpenAI({ apiKey, timeout: 30_000 });
 
   const base64Image = imageData.toString("base64");
 
@@ -68,22 +68,32 @@ export async function analyzeImage(
   const latencyMs = Date.now() - startTime;
   logger.info({ latencyMs }, "LLM response received");
 
-  const content = response.choices[0]?.message?.content;
-  if (!content) {
+  const rawContent = response.choices[0]?.message?.content;
+  if (!rawContent) {
     throw new LLMError("Empty response from model");
   }
+
+  // GPT-4o occasionally wraps its JSON in markdown fences despite being
+  // instructed not to. Strip them before parsing.
+  const content = rawContent
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "");
 
   let parsed: unknown;
   try {
     parsed = JSON.parse(content);
   } catch {
-    logger.error("LLM returned invalid JSON");
+    logger.error({ rawContent }, "LLM returned invalid JSON");
     throw new LLMError("Invalid JSON from model");
   }
 
   const result = ScanResponseSchema.safeParse(parsed);
   if (!result.success) {
-    logger.error({ errors: result.error.issues }, "LLM response failed schema validation");
+    logger.error(
+      { errors: result.error.issues, rawContent },
+      "LLM response failed schema validation"
+    );
     throw new LLMError("Response failed schema validation");
   }
 
