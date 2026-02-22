@@ -1,21 +1,21 @@
 import { z } from "zod";
 
 export const IngredientSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string().min(1),
   name: z.string().min(1).max(100),
   category: z.string().min(1).max(50),
   confidence: z.number().min(0).max(1),
 });
 
 export const RecipeIngredientSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string().min(1),
   name: z.string().min(1).max(100),
   isDetected: z.boolean(),
   substitution: z.string().max(200).nullable(),
 });
 
 export const RecipeSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string().min(1),
   name: z.string().min(1).max(200),
   summary: z.string().min(1).max(500),
   cookTimeMinutes: z.number().int().positive().max(120),

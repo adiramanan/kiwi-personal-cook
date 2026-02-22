@@ -97,7 +97,35 @@ export async function analyzeImage(
     throw new LLMError("Response failed schema validation");
   }
 
-  return result.data;
+  return assignUUIDs(result.data);
+}
+
+/** Replace all LLM-assigned IDs (often "1", "2", …) with proper UUIDs.
+ *  Maintains cross-references: recipe ingredient IDs that match a top-level
+ *  ingredient ID get the same UUID so the iOS app can correlate them. */
+function assignUUIDs(data: ScanResponseType): ScanResponseType {
+  const idMap = new Map<string, string>();
+
+  const getOrCreate = (oldId: string) => {
+    if (!idMap.has(oldId)) idMap.set(oldId, crypto.randomUUID());
+    return idMap.get(oldId)!;
+  };
+
+  const ingredients = data.ingredients.map((ing) => ({
+    ...ing,
+    id: getOrCreate(ing.id),
+  }));
+
+  const recipes = data.recipes.map((recipe) => ({
+    ...recipe,
+    id: crypto.randomUUID(),
+    ingredients: recipe.ingredients.map((ri) => ({
+      ...ri,
+      id: getOrCreate(ri.id),
+    })),
+  }));
+
+  return { ingredients, recipes };
 }
 
 export class LLMError extends Error {
