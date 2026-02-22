@@ -194,7 +194,7 @@ enum Config {
             return (url, .infoPlist)
         }
         #if DEBUG
-        return (URL(string: "http://192.168.1.11:3000")!, .debugFallback)
+        return (URL(string: "http://192.168.0.120:3000")!, .debugFallback)
         #else
         return (URL(string: "https://api.kiwi.example.com")!, .releaseFallback)
         #endif

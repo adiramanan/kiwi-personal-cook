@@ -1,6 +1,5 @@
 import { getDb } from "../db/client.js";
-
-const DAILY_LIMIT = 4;
+import { config } from "../utils/config.js";
 
 export interface QuotaInfo {
   remaining: number;
@@ -21,8 +20,8 @@ export async function getQuota(userId: string): Promise<QuotaInfo> {
   tomorrow.setUTCHours(0, 0, 0, 0);
 
   return {
-    remaining: Math.max(0, DAILY_LIMIT - scanCount),
-    limit: DAILY_LIMIT,
+    remaining: Math.max(0, config.dailyScanLimit - scanCount),
+    limit: config.dailyScanLimit,
     resetsAt: tomorrow.toISOString(),
   };
 }

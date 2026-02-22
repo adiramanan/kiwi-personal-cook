@@ -18,4 +18,5 @@ export const config = {
   appleClientId: required("APPLE_CLIENT_ID"),
   appleKeyId: required("APPLE_KEY_ID"),
   logLevel: optional("LOG_LEVEL", "info"),
+  dailyScanLimit: parseInt(optional("DAILY_SCAN_LIMIT", "40"), 10),
 } as const;

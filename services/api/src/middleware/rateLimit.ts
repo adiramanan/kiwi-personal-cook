@@ -2,14 +2,13 @@ import type { Context, Next } from "hono";
 import type { AppEnv } from "../types.js";
 import { getScanCount } from "../models/quota.js";
 import { logger } from "../utils/logger.js";
-
-const DAILY_LIMIT = 4;
+import { config } from "../utils/config.js";
 
 export async function rateLimitMiddleware(c: Context<AppEnv>, next: Next) {
   const userId = c.get("userId");
   const scanCount = await getScanCount(userId);
 
-  if (scanCount >= DAILY_LIMIT) {
+  if (scanCount >= config.dailyScanLimit) {
     const tomorrow = new Date();
     tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
     tomorrow.setUTCHours(0, 0, 0, 0);

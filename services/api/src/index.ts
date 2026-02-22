@@ -9,6 +9,7 @@ import scanRoutes from "./routes/scan.js";
 import quotaRoutes from "./routes/quota.js";
 import accountRoutes from "./routes/account.js";
 import { logger } from "./utils/logger.js";
+import { runMigrations } from "./utils/migrate.js";
 
 const app = new Hono();
 
@@ -32,6 +33,8 @@ app.onError((err, c) => {
 });
 
 const port = parseInt(process.env.PORT ?? "3000", 10);
+
+await runMigrations();
 
 serve({ fetch: app.fetch, port }, () => {
   logger.info({ port }, "Kiwi API server started");
