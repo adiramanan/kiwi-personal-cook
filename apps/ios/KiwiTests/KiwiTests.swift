@@ -149,6 +149,54 @@ struct ClientRateLimiterTests {
     }
 }
 
+@Suite("ScanFridgeUseCase")
+struct ScanFridgeUseCaseTests {
+    @Test func mapsInvalidImageToAPIError() async {
+        let useCase = ScanFridgeUseCase(imagePreprocessor: { _ in
+            throw ImageProcessingError.invalidImage
+        })
+
+        do {
+            _ = try await useCase.execute(image: UIImage())
+            #expect(false)
+        } catch let error as APIError {
+            #expect(error == .imageProcessingInvalid)
+        } catch {
+            #expect(false)
+        }
+    }
+
+    @Test func mapsImageTooLargeToAPIError() async {
+        let useCase = ScanFridgeUseCase(imagePreprocessor: { _ in
+            throw ImageProcessingError.imageTooLarge
+        })
+
+        do {
+            _ = try await useCase.execute(image: UIImage())
+            #expect(false)
+        } catch let error as APIError {
+            #expect(error == .imageProcessingTooLarge)
+        } catch {
+            #expect(false)
+        }
+    }
+
+    @Test func mapsCompressionFailureToAPIError() async {
+        let useCase = ScanFridgeUseCase(imagePreprocessor: { _ in
+            throw ImageProcessingError.compressionFailed
+        })
+
+        do {
+            _ = try await useCase.execute(image: UIImage())
+            #expect(false)
+        } catch let error as APIError {
+            #expect(error == .imageProcessingCompressionFailed)
+        } catch {
+            #expect(false)
+        }
+    }
+}
+
 // MARK: - ViewModel Tests
 
 @Suite("ResultsViewModel")
@@ -163,6 +211,20 @@ struct ResultsViewModelTests {
         vm.removeIngredient("1")
         #expect(vm.ingredients.count == 1)
         #expect(vm.ingredients[0].name == "Milk")
+    }
+
+    @Test func scanSurfacesMappedImageProcessingError() async {
+        let failingUseCase = ScanFridgeUseCase(imagePreprocessor: { _ in
+            throw ImageProcessingError.imageTooLarge
+        })
+        let vm = ResultsViewModel(
+            image: UIImage(),
+            scanUseCase: failingUseCase
+        )
+
+        await vm.scan()
+
+        #expect(vm.error == .imageProcessingTooLarge)
     }
 }
 
@@ -194,8 +256,18 @@ struct RecipeDetailViewModelTests {
 
 @Suite("GroceriesViewModel")
 struct GroceriesViewModelTests {
+    private let storageKey = "com.kiwi.tests.groceries"
+
+    private func makeIsolatedDefaults() -> UserDefaults {
+        let suiteName = "com.kiwi.tests.groceries.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        return defaults
+    }
+
     @Test func addsAndRemovesItems() {
-        let vm = GroceriesViewModel()
+        let defaults = makeIsolatedDefaults()
+        let vm = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
         vm.newItemName = "Carrots"
         vm.addItem()
         #expect(vm.ingredients.count == 1)
@@ -206,14 +278,16 @@ struct GroceriesViewModelTests {
     }
 
     @Test func ignoresEmptyInput() {
-        let vm = GroceriesViewModel()
+        let defaults = makeIsolatedDefaults()
+        let vm = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
         vm.newItemName = "   "
         vm.addItem()
         #expect(vm.ingredients.isEmpty)
     }
 
     @Test func addDetectedIngredientsDeduplicated() {
-        let vm = GroceriesViewModel()
+        let defaults = makeIsolatedDefaults()
+        let vm = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
         vm.newItemName = "Eggs"
         vm.addItem()
 
@@ -224,5 +298,32 @@ struct GroceriesViewModelTests {
         vm.addDetectedIngredients(detected)
 
         #expect(vm.ingredients.count == 2)
+    }
+
+    @Test func persistsItemsAcrossViewModelInstances() {
+        let defaults = makeIsolatedDefaults()
+
+        let vm = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
+        vm.newItemName = "Spinach"
+        vm.addItem()
+
+        let restored = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
+        #expect(restored.ingredients.count == 1)
+        #expect(restored.ingredients[0].name == "Spinach")
+    }
+
+    @Test func persistsRemovalsAcrossViewModelInstances() {
+        let defaults = makeIsolatedDefaults()
+
+        let vm = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
+        vm.newItemName = "Eggs"
+        vm.addItem()
+        vm.newItemName = "Milk"
+        vm.addItem()
+        vm.removeItem(vm.ingredients[0])
+
+        let restored = GroceriesViewModel(userDefaults: defaults, storageKey: storageKey)
+        #expect(restored.ingredients.count == 1)
+        #expect(restored.ingredients[0].name == "Eggs")
     }
 }

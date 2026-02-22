@@ -14,6 +14,10 @@ scan.post("/", async (c) => {
   const file = formData.get("image");
 
   if (!file || !(file instanceof File)) {
+    logger.warn(
+      { userId, contentType: file instanceof File ? file.type : undefined },
+      "Scan rejected: missing image file"
+    );
     return c.json({ error: "missing_image" }, 400);
   }
 
@@ -22,6 +26,10 @@ scan.post("/", async (c) => {
 
   const validation = validateImage(buffer, file.type);
   if (!validation.valid) {
+    logger.warn(
+      { userId, reason: validation.error, contentType: file.type, sizeBytes: buffer.length },
+      "Scan rejected: invalid image"
+    );
     return c.json({ error: "invalid_image", message: validation.error }, 400);
   }
 
@@ -33,7 +41,7 @@ scan.post("/", async (c) => {
 
     logger.info(
       {
-        userId: userId.substring(0, 8),
+        userId,
         ingredientCount: result.ingredients.length,
         recipeCount: result.recipes.length,
       },
@@ -43,7 +51,11 @@ scan.post("/", async (c) => {
     return c.json(result);
   } catch (error) {
     if (error instanceof LLMError) {
-      logger.error({ error: error.message }, "LLM processing failed");
+      logger.warn(
+        { userId, error: error.message },
+        "Scan rejected: invalid model response"
+      );
+      logger.error({ userId, error: error.message }, "LLM processing failed");
       return c.json({ error: "invalid_model_response" }, 502);
     }
     throw error;

@@ -4,6 +4,12 @@ import SwiftUI
 struct KiwiApp: App {
     @State private var appState = AppState()
 
+    init() {
+#if DEBUG
+        Config.logResolvedBaseURLIfNeeded()
+#endif
+    }
+
     var body: some Scene {
         WindowGroup {
             Group {

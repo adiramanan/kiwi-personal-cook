@@ -6,7 +6,7 @@ Kiwi is a personal cooking assistant that turns a fridge photo into a short list
 
 - `apps/ios` - SwiftUI iOS client (feature-first MVVM)
 - `services/api` - Hono + TypeScript backend API
-- `docs` - architecture and build notes
+- `docs` - architecture, build notes, and [project status / roadmap](docs/PROJECT_STATUS.md)
 
 ## iOS (Scaffold)
 

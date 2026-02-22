@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { authMiddleware } from "./middleware/auth.js";
 import { rateLimitMiddleware } from "./middleware/rateLimit.js";
+import { requestLoggerMiddleware } from "./middleware/requestLogger.js";
 import authRoutes from "./routes/auth.js";
 import scanRoutes from "./routes/scan.js";
 import quotaRoutes from "./routes/quota.js";
@@ -10,6 +11,8 @@ import accountRoutes from "./routes/account.js";
 import { logger } from "./utils/logger.js";
 
 const app = new Hono();
+
+app.use("*", requestLoggerMiddleware);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
 
