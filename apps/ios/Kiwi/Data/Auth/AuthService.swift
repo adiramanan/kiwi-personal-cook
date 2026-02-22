@@ -13,7 +13,9 @@ struct AuthService: Sendable {
     }
 
     func authenticate(identityToken: Data) async throws -> AuthSession {
-        let tokenString = identityToken.base64EncodedString()
+        guard let tokenString = String(data: identityToken, encoding: .utf8) else {
+            throw APIError.invalidResponse
+        }
         let body = AuthRequest(identityToken: tokenString)
 
         var request = URLRequest(url: Config.apiBaseURL.appendingPathComponent(Endpoint.authApple.path))

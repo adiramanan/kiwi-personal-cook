@@ -130,6 +130,10 @@ enum Config {
            let url = URL(string: urlString) {
             return url
         }
+        #if DEBUG
+        return URL(string: "http://192.168.1.11:3000")!
+        #else
         return URL(string: "https://api.kiwi.example.com")!
+        #endif
     }()
 }

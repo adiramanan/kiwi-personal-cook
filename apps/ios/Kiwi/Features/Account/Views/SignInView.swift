@@ -22,15 +22,29 @@ struct SignInView: View {
 
             Spacer()
 
-            SignInWithAppleButton(.signIn) { request in
-                request.requestedScopes = [.email]
-            } onCompletion: { result in
-                handleSignIn(result)
+            if let errorMessage = appState.signInError {
+                Text(errorMessage)
+                    .font(KiwiTypography.caption)
+                    .foregroundStyle(.red)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, KiwiSpacing.xxl)
+                    .transition(.opacity)
             }
-            .signInWithAppleButtonStyle(.black)
-            .frame(height: 50)
-            .padding(.horizontal, KiwiSpacing.xxl)
-            .accessibilityLabel("Sign in with Apple")
+
+            if appState.isSigningIn {
+                ProgressView()
+                    .frame(height: 50)
+            } else {
+                SignInWithAppleButton(.signIn) { request in
+                    request.requestedScopes = [.email]
+                } onCompletion: { result in
+                    handleSignIn(result)
+                }
+                .signInWithAppleButtonStyle(.black)
+                .frame(height: 50)
+                .padding(.horizontal, KiwiSpacing.xxl)
+                .accessibilityLabel("Sign in with Apple")
+            }
 
             Text("We never store your fridge photos. Images are processed and immediately deleted.")
                 .font(KiwiTypography.caption)
@@ -41,17 +55,26 @@ struct SignInView: View {
             Spacer()
                 .frame(height: KiwiSpacing.xxl)
         }
+        .animation(.default, value: appState.signInError)
+        .animation(.default, value: appState.isSigningIn)
     }
 
     private func handleSignIn(_ result: Result<ASAuthorization, Error>) {
-        guard case .success(let authorization) = result,
-              let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
-              let identityToken = credential.identityToken else {
-            return
-        }
-
-        Task {
-            try? await appState.signIn(identityToken: identityToken)
+        switch result {
+        case .success(let authorization):
+            guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
+                  let identityToken = credential.identityToken else {
+                appState.signInError = "Could not retrieve credentials. Please try again."
+                return
+            }
+            Task {
+                await appState.signIn(identityToken: identityToken)
+            }
+        case .failure(let error):
+            if (error as NSError).code == ASAuthorizationError.canceled.rawValue {
+                return
+            }
+            appState.signInError = "Sign in with Apple failed. Please try again."
         }
     }
 }
