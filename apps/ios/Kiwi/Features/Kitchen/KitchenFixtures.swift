@@ -6,13 +6,18 @@ import Foundation
     var accountIdentifier = "ui-test-account"
     var generationError: APIError?
     var inventoryError: APIError?
+    var identityError: APIError?
     var items = ["egg", "spinach", "rice", "olive oil", "salt"].map { FridgeItem(name: $0) }
     var family: [FamilyMember] = {
         var maya = FamilyMember(); maya.name = "Maya"; maya.diet = "vegetarian"; maya.goal = "muscleGain"; maya.calorieTarget = 650; maya.proteinTarget = 35; maya.cuisines = ["Indian"]
         var arjun = FamilyMember(); arjun.name = "Arjun"; arjun.goal = "weightManagement"; arjun.allergies = ["peanut"]; arjun.calorieTarget = 450
         return [maya, arjun]
     }()
-    func identity() async throws -> String { accountIdentifier }
+    func identity() async throws -> String {
+        if ProcessInfo.processInfo.arguments.contains("--session-expired") { throw APIError.unauthorized }
+        if let identityError { throw identityError }
+        return accountIdentifier
+    }
     func inventory() async throws -> [FridgeItem] { items }
     func members() async throws -> [FamilyMember] { family }
     func quota() async throws -> KitchenQuota { KitchenQuota(remaining: 4, limit: 4, generationRemaining: 4, generationLimit: 4) }

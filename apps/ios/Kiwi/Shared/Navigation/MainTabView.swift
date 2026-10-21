@@ -26,6 +26,12 @@ struct MainTabView: View {
         .onChange(of: appState.isAuthenticated) { _, authenticated in
             if !authenticated { kitchen.clearLocalAccountData() }
         }
+        .onChange(of: kitchen.requiresSignIn) { _, requiresSignIn in
+            if requiresSignIn {
+                appState.signOut()
+                appState.signInError = APIError.unauthorized.userMessage
+            }
+        }
         .alert("Couldn't finish", isPresented: Binding(get: { kitchen.error != nil }, set: { if !$0 { kitchen.error = nil } })) {
             Button("OK") { kitchen.error = nil }
         } message: { Text(kitchen.error ?? "") }

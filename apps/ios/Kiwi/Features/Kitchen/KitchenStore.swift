@@ -10,6 +10,7 @@ final class KitchenStore {
     var isLoading = false
     var isGenerating = false
     var error: String?
+    private(set) var requiresSignIn = false
     private(set) var accountID: String?
     private let service: any KitchenServing
     private let defaults: UserDefaults
@@ -38,7 +39,7 @@ final class KitchenStore {
     }
 
     func refresh() async {
-        guard !isLoading else { return }
+        guard !isLoading, !requiresSignIn else { return }
         isLoading = true
         defer { isLoading = false }
         do {
@@ -141,6 +142,9 @@ final class KitchenStore {
         guard !Task.isCancelled, !(error is CancellationError) else { return }
         if let apiError = error as? APIError {
             switch apiError {
+            case .unauthorized:
+                requiresSignIn = true
+                self.error = nil
             case .rateLimited: self.error = "You've reached today's allowance. Your fridge and profiles are saved. Try again tomorrow."
             case .serverError(_, let message): self.error = message ?? apiError.userMessage
             default: self.error = apiError.userMessage

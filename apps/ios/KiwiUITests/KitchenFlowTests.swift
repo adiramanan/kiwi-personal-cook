@@ -78,6 +78,16 @@ final class KitchenFlowTests: XCTestCase {
         XCTAssertTrue(app.alerts["Couldn't finish"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.alerts.staticTexts["No internet connection. Check your network and try again."].exists)
     }
+    func testExpiredSessionReturnsToSignIn() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["--kitchen-ui-tests", "--session-expired"]
+        app.launch()
+        XCTAssertTrue(app.buttons["Sign in with Apple"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Your session has expired. Please sign in again."].exists)
+        XCTAssertFalse(app.alerts["Couldn't finish"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Cook"].exists)
+    }
     func testGenerationQuotaError() {
         let app = launch(extra: ["--generation-limited"])
         app.buttons["Find recipes"].tap()

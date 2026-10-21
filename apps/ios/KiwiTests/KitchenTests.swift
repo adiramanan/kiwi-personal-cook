@@ -6,6 +6,47 @@ import Foundation
 struct KitchenTests {
     private func defaults() -> UserDefaults { UserDefaults(suiteName: UUID().uuidString)! }
 
+    @Test func rejectedSessionRequestsSignInInsteadOfRepeatingAnAlert() async {
+        let service = KitchenFixtureService()
+        service.identityError = .unauthorized
+        let kitchen = KitchenStore(service: service, defaults: defaults())
+        await kitchen.refresh()
+        #expect(kitchen.requiresSignIn)
+        #expect(kitchen.error == nil)
+        #expect(kitchen.accountID == nil)
+        // Foreground refresh must not resume loading data with this rejected session.
+        service.identityError = nil
+        await kitchen.refresh()
+        #expect(kitchen.accountID == nil)
+        #expect(kitchen.inventory.isEmpty)
+    }
+
+    @Test func networkFailureDoesNotExpireTheSession() async {
+        let service = KitchenFixtureService()
+        let kitchen = KitchenStore(service: service, defaults: defaults())
+        await kitchen.refresh()
+        let savedInventory = kitchen.inventory
+        service.identityError = .networkError(URLError(.timedOut))
+        await kitchen.refresh()
+        #expect(!kitchen.requiresSignIn)
+        #expect(kitchen.error != nil)
+        #expect(kitchen.inventory == savedInventory)
+        service.identityError = nil
+        await kitchen.refresh()
+        #expect(!kitchen.requiresSignIn)
+    }
+
+    @Test func rejectedSessionDuringGenerationRequestsSignIn() async {
+        let service = KitchenFixtureService()
+        let kitchen = KitchenStore(service: service, defaults: defaults())
+        await kitchen.refresh()
+        service.generationError = .unauthorized
+        await kitchen.generate()
+        #expect(kitchen.requiresSignIn)
+        #expect(kitchen.error == nil)
+        #expect(!kitchen.isGenerating)
+    }
+
     @Test func savesIngredientsForLaterCooking() async {
         let service = KitchenFixtureService()
         let kitchen = KitchenStore(service: service, defaults: defaults())
