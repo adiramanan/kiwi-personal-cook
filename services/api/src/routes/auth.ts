@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { verifyAppleToken } from "../services/appleAuth.js";
 import { upsertUser, createSession } from "../models/user.js";
 import { logger } from "../utils/logger.js";
+import { config } from "../utils/config.js";
 
 const auth = new Hono();
 
@@ -13,8 +14,7 @@ auth.post("/apple", async (c) => {
   }
 
   try {
-    const clientId = process.env.APPLE_CLIENT_ID!;
-    const payload = await verifyAppleToken(body.identityToken, clientId);
+    const payload = await verifyAppleToken(body.identityToken, config.appleClientId);
 
     const user = await upsertUser(payload.sub, payload.email ?? null);
     const session = await createSession(user.id);

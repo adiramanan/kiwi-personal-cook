@@ -5,6 +5,7 @@ enum Endpoint: Sendable {
     case quota
     case deleteAccount
     case authApple
+    case kitchen(String, String)
 
     var path: String {
         switch self {
@@ -12,6 +13,7 @@ enum Endpoint: Sendable {
         case .quota: "/v1/quota"
         case .deleteAccount: "/v1/account"
         case .authApple: "/v1/auth/apple"
+        case .kitchen(let resource, _): "/v1/kitchen/\(resource)"
         }
     }
 
@@ -21,6 +23,7 @@ enum Endpoint: Sendable {
         case .quota: "GET"
         case .deleteAccount: "DELETE"
         case .authApple: "POST"
+        case .kitchen(_, let method): method
         }
     }
 }

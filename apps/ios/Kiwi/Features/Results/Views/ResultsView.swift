@@ -29,6 +29,10 @@ struct ResultsView: View {
     private var resultsList: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: KiwiSpacing.xl) {
+                if viewModel.ingredients.isEmpty && viewModel.recipes.isEmpty {
+                    emptyState
+                }
+
                 if !viewModel.ingredients.isEmpty {
                     ingredientsSection
                 }
@@ -39,6 +43,15 @@ struct ResultsView: View {
             }
             .padding(KiwiSpacing.lg)
         }
+    }
+
+    private var emptyState: some View {
+        ContentUnavailableView(
+            "No Ingredients Found",
+            systemImage: "refrigerator",
+            description: Text("We couldn't spot any ingredients in that photo. Try a clearer, well-lit shot of your fridge.")
+        )
+        .padding(.top, KiwiSpacing.xl)
     }
 
     private var ingredientsSection: some View {

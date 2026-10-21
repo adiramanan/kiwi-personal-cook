@@ -19,7 +19,10 @@ APPLE_TEAM_ID=...
 APPLE_CLIENT_ID=com.kiwi.app
 APPLE_KEY_ID=...
 LOG_LEVEL=info
+DAILY_SCAN_LIMIT=40   # optional, defaults to 40
 ```
+
+Required variables are validated at startup via `src/utils/config.ts` (`validateConfig()`); the process exits immediately if any are missing. Access env values through `config`, never `process.env` directly.
 
 ### Install Dependencies
 
@@ -28,6 +31,8 @@ cd services/api && npm install
 ```
 
 ### Run Database Migrations
+
+Migrations run automatically at server startup (`src/utils/migrate.ts`). To apply manually:
 
 ```sh
 psql $DATABASE_URL < src/db/migrations/001_init.sql
@@ -75,7 +80,7 @@ cd services/api && npx tsc --noEmit
 - **Language**: TypeScript (strict mode)
 - **Framework**: Hono
 - **Database**: PostgreSQL (raw SQL, parameterized queries)
-- **LLM**: OpenAI gpt-4o
+- **LLM**: OpenAI gpt-6-luna (Chat Completions, low reasoning effort, `max_completion_tokens`; no temperature override)
 - **Validation**: Zod
 - **Auth**: Jose (Apple JWT verification)
 - **Logging**: Pino

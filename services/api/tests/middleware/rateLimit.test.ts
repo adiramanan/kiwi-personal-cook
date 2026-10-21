@@ -14,6 +14,7 @@ describe("rate limit middleware", () => {
   let app: Hono;
 
   beforeEach(() => {
+    process.env.DAILY_SCAN_LIMIT = "4";
     app = new Hono();
     app.use("/*", async (c, next) => {
       c.set("userId", "user-123");

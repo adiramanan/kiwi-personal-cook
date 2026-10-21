@@ -1,12 +1,20 @@
 # Kiwi Personal Cook — Project Status and Roadmap
 
+## Goal-aware kitchen update — 2026-10-21
+
+The current product scope supersedes the earlier deferral of dietary preferences below. Implemented the Cook/Fridge/Family experience, saved account-owned inventory, multi-photo ingredient recognition, family restrictions/tastes/goals, optional per-meal targets, shared meals with personal portions, estimated nutrition and a separate shopping checklist. The placeholder Chat screen is no longer the main navigation destination; legacy scan APIs remain available.
+
+See [feature scope and API contract](KITCHEN_FEATURES.md) for implementation details, defaults, privacy limits, migrations and validation. Validation: backend type checking and 45 tests passed; iOS simulator build, 29 unit tests and 14 UI/launch checks passed on iPhone 17 / iOS 26.5. The photo-review and explicit dark/large-text checks were rerun after final camera/test-harness fixes. Screenshots were reviewed; automated visual baseline comparison is not configured. Live provider quality and PostgreSQL integration were not exercised. No deployment has been performed.
+
 ## Quick Reference
 
 | Metric | Value |
 | ------ | ----- |
-| **Completion** | ~95% (iOS app + backend API + deployed infrastructure) |
-| **Top blockers** | App Store prep, UI polish, test coverage |
+| **Completion** | ~95% (iOS app + backend API; **production deployment is DOWN — see below**) |
+| **Top blockers** | Railway deployment gone (redeploy needed), App Store prep, UI polish |
 | **Key decisions** | See [Key Decisions (Updated 2026-02-22)](#key-decisions-updated-2026-02-22) below |
+
+> **⚠️ Deployment status (verified 2026-07-24):** `kiwi-personal-cook-production.up.railway.app` returns Railway's "Application not found" — the app/environment no longer exists on Railway. Development runs against the local API (`http://MacBook-Air.local:3000`, the Debug `API_BASE_URL`). Production requires a redeploy (Railway or another host) and updating the Release `API_BASE_URL` build setting if the domain changes.
 
 **Agent update rule:** When any agent completes (or materially changes) a roadmap step, it must update this document in the same change set.
 
@@ -95,6 +103,7 @@ graph TD
 
 - [KiwiTests/](apps/ios/KiwiTests/): Model decoding, `ClientRateLimiter`, some ViewModel tests (Results, RecipeDetail, Groceries)
 - [KiwiUITests/](apps/ios/KiwiUITests/): Basic smoke tests (sign-in view, tab bar, navigation)
+- **Verified 2026-07-24**: 28 test runs, 0 failures on iPhone 17 / iOS 26.5 simulator (fixed a missing `import UIKit` in KiwiTests.swift). Device-destination build signs successfully with the team provisioning profile.
 - **Missing**: APIClient tests, AuthService tests, ImageMetadataStripper tests, snapshot tests
 
 ### Backend API ([services/api/](services/api/))
@@ -119,9 +128,11 @@ graph TD
 
 **Minor Issues:**
 
-- [src/utils/config.ts](services/api/src/utils/config.ts) is **implemented but unused** — all env vars accessed via `process.env` directly
-- `closeDb()` exists but is never called (no graceful shutdown handler)
+- ~~config.ts unused~~ — **Fixed (2026-07-24)**: all env access now goes through [config.ts](services/api/src/utils/config.ts) (lazy getters), with `validateConfig()` failing fast at startup
+- ~~`closeDb()` never called~~ — **Fixed (2026-07-24)**: SIGTERM/SIGINT handlers drain the server and close the DB pool ([src/index.ts](services/api/src/index.ts))
 - `deleteUserSessions()` exists but unused (DB cascade handles it)
+
+**Tests (2026-07-24):** 26 Vitest tests across routes/middleware/services pass; `tsc --noEmit` clean.
 
 ### Documentation
 
@@ -188,8 +199,8 @@ graph TD
 - ImageMetadataStripper unit tests
 - Snapshot tests for key views (Scan, Results, RecipeDetail, Account, SignIn)
 
-- [ ] Backend: Use config.ts consistently instead of raw process.env, add graceful shutdown
-- [ ] Backend: Add Vitest tests for routes, middleware, services, and models
+- [x] Backend: Use config.ts consistently instead of raw process.env, add graceful shutdown (2026-07-24)
+- [x] Backend: Vitest tests for routes, middleware, and services (26 passing as of 2026-07-24; model-layer tests still open)
 - [ ] iOS: Expand test coverage — APIClient, AuthService, UseCases, ImageMetadataStripper, snapshot tests
 
 ### Phase 3: Polish and Production Readiness — Medium Priority (In Progress)
@@ -199,7 +210,14 @@ graph TD
 - Verify animations: fade-in results, staggered recipe cards (per design spec)
 - Dark mode audit across all screens
 - Accessibility audit: VoiceOver labels, Dynamic Type scaling, contrast ratios, 44pt touch targets
-- Empty state illustrations for each feature
+- Empty state illustrations for each feature — Results empty state added 2026-07-24 (`ContentUnavailableView` when a scan detects nothing)
+
+**Device-readiness fixes (2026-07-24):**
+
+- Added missing `NSCameraUsageDescription` (app crashed on camera open on a physical device) and `NSLocalNetworkUsageDescription` to both build configurations
+- Debug `API_BASE_URL` now `http://MacBook-Air.local:3000` (mDNS, survives DHCP lease changes); Release points at the production URL; Swift debug fallback aligned
+- Fixed Swift 6 concurrency warning: `KeychainHelper` is now `nonisolated` so the detached-task Keychain read in `AppState.checkAuth()` genuinely runs off the main actor
+- **Known gotcha**: the macOS application firewall blocks incoming connections per node binary — after a Homebrew node upgrade, re-allow the new binary (System Settings > Network > Firewall > Options) or the iPhone cannot reach the local API
 
 **3.2 Error Handling Hardening**
 
@@ -242,7 +260,7 @@ graph TD
 - API: Lint + typecheck + test on every PR
 - Quality gates: no secrets committed, all tests pass, build succeeds
 
-- [x] Infrastructure: PostgreSQL hosted on Railway, API deployed at `kiwi-personal-cook-production.up.railway.app`, DB migrations run on startup
+- [ ] Infrastructure: **Redeploy required** — the Railway app at `kiwi-personal-cook-production.up.railway.app` no longer exists (verified 2026-07-24). DB migrations still run on startup; local dev uses Homebrew PostgreSQL 17 + `.env`
 
 ### Phase 5: Pre-Launch — Low Priority Until Above Complete (Not Started)
 

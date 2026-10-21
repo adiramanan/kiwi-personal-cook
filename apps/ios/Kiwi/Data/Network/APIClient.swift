@@ -18,6 +18,7 @@ final class APIClient: Sendable {
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T {
         var urlRequest = URLRequest(url: baseURL.appendingPathComponent(endpoint.path))
         urlRequest.httpMethod = endpoint.method
+        urlRequest.timeoutInterval = 90
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         AuthInterceptor.apply(to: &urlRequest)
 
@@ -28,6 +29,7 @@ final class APIClient: Sendable {
     func requestVoid(_ endpoint: Endpoint) async throws {
         var urlRequest = URLRequest(url: baseURL.appendingPathComponent(endpoint.path))
         urlRequest.httpMethod = endpoint.method
+        urlRequest.timeoutInterval = 90
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         AuthInterceptor.apply(to: &urlRequest)
         debugLog("Request start \(endpoint.method) \(urlRequest.url?.absoluteString ?? "<nil>")")
@@ -73,6 +75,7 @@ final class APIClient: Sendable {
         let boundary = UUID().uuidString
         var urlRequest = URLRequest(url: baseURL.appendingPathComponent(endpoint.path))
         urlRequest.httpMethod = endpoint.method
+        urlRequest.timeoutInterval = 90
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         AuthInterceptor.apply(to: &urlRequest)
 
@@ -89,6 +92,38 @@ final class APIClient: Sendable {
         )
 
         return try await perform(urlRequest)
+    }
+
+    func send<T: Decodable, Body: Encodable>(_ endpoint: Endpoint, body: Body) async throws -> T {
+        try await sendData(endpoint, body: JSONEncoder().encode(body))
+    }
+
+    func sendData<T: Decodable>(_ endpoint: Endpoint, body: Data) async throws -> T {
+        var request = URLRequest(url: baseURL.appendingPathComponent(endpoint.path))
+        request.httpMethod = endpoint.method
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = body
+        request.timeoutInterval = 90
+        AuthInterceptor.apply(to: &request)
+        return try await perform(request)
+    }
+
+    func uploadImages<T: Decodable>(_ images: [Data]) async throws -> T {
+        let boundary = UUID().uuidString
+        var request = URLRequest(url: baseURL.appendingPathComponent("/v1/kitchen/recognize"))
+        request.httpMethod = "POST"
+        request.timeoutInterval = 90
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        AuthInterceptor.apply(to: &request)
+        var body = Data()
+        for (index, data) in images.enumerated() {
+            body.append(Data("--\(boundary)\r\nContent-Disposition: form-data; name=\"images\"; filename=\"fridge-\(index).jpg\"\r\nContent-Type: image/jpeg\r\n\r\n".utf8))
+            body.append(data)
+            body.append(Data("\r\n".utf8))
+        }
+        body.append(Data("--\(boundary)--\r\n".utf8))
+        request.httpBody = body
+        return try await perform(request)
     }
 
     private func perform<T: Decodable>(_ request: URLRequest) async throws -> T {
@@ -144,17 +179,7 @@ final class APIClient: Sendable {
         return Date().addingTimeInterval(seconds)
     }
 
-    private func debugBodySnippet(_ data: Data) -> String {
-#if DEBUG
-        guard !data.isEmpty else { return "<empty>" }
-        if let text = String(data: data, encoding: .utf8) {
-            return String(text.prefix(280)).replacingOccurrences(of: "\n", with: "\\n")
-        }
-        return "<non-utf8 \(data.count) bytes>"
-#else
-        return "<omitted>"
-#endif
-    }
+    private func debugBodySnippet(_ data: Data) -> String { "<redacted>" }
 
     private func debugLogUnexpectedError(stage: String, error: Error) {
 #if DEBUG
@@ -194,7 +219,7 @@ enum Config {
             return (url, .infoPlist)
         }
         #if DEBUG
-        return (URL(string: "http://192.168.0.120:3000")!, .debugFallback)
+        return (URL(string: "http://MacBook-Air.local:3000")!, .debugFallback)
         #else
         return (URL(string: "https://kiwi-personal-cook-production.up.railway.app")!, .releaseFallback)
         #endif

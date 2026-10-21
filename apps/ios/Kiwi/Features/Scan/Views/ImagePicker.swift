@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.dismiss) private var dismiss
     let onImagePicked: (UIImage) -> Void
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -14,14 +15,16 @@ struct ImagePicker: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(onImagePicked: onImagePicked)
+        Coordinator(onImagePicked: onImagePicked, onDismiss: { dismiss() })
     }
 
     final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let onImagePicked: (UIImage) -> Void
+        let onDismiss: () -> Void
 
-        init(onImagePicked: @escaping (UIImage) -> Void) {
+        init(onImagePicked: @escaping (UIImage) -> Void, onDismiss: @escaping () -> Void) {
             self.onImagePicked = onImagePicked
+            self.onDismiss = onDismiss
         }
 
         func imagePickerController(
@@ -31,11 +34,11 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let image = info[.originalImage] as? UIImage {
                 onImagePicked(image)
             }
-            picker.dismiss(animated: true)
+            onDismiss()
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true)
+            onDismiss()
         }
     }
 }

@@ -46,9 +46,9 @@ export async function analyzeImage(
 
   const startTime = Date.now();
   const response = await client.chat.completions.create({
-    model: "gpt-4o",
-    temperature: 0.3,
-    max_tokens: 4096,
+    model: "gpt-6-luna",
+    reasoning_effort: "low",
+    max_completion_tokens: 4096,
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
       {
@@ -73,7 +73,7 @@ export async function analyzeImage(
     throw new LLMError("Empty response from model");
   }
 
-  // GPT-4o occasionally wraps its JSON in markdown fences despite being
+  // Models may wrap their JSON in markdown fences despite being
   // instructed not to. Strip them before parsing.
   const content = rawContent
     .trim()
@@ -84,14 +84,14 @@ export async function analyzeImage(
   try {
     parsed = JSON.parse(content);
   } catch {
-    logger.error({ rawContent }, "LLM returned invalid JSON");
+    logger.error("LLM returned invalid JSON");
     throw new LLMError("Invalid JSON from model");
   }
 
   const result = ScanResponseSchema.safeParse(parsed);
   if (!result.success) {
     logger.error(
-      { errors: result.error.issues, rawContent },
+      { validationFailureCount: result.error.issues.length },
       "LLM response failed schema validation"
     );
     throw new LLMError("Response failed schema validation");

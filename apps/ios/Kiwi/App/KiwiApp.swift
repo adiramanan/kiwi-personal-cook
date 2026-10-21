@@ -10,6 +10,14 @@ struct KiwiApp: App {
 #endif
     }
 
+    private var previewColorScheme: ColorScheme? {
+#if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--kitchen-ui-tests"),
+           ProcessInfo.processInfo.arguments.contains("--dark-mode") { return .dark }
+#endif
+        return nil
+    }
+
     var body: some Scene {
         WindowGroup {
             Group {
@@ -23,12 +31,13 @@ struct KiwiApp: App {
                             .font(.system(size: 36, weight: .bold, design: .rounded))
                     }
                 } else if appState.isAuthenticated {
-                    MainTabView()
+                    MainTabView().id(appState.sessionToken)
                 } else {
                     SignInView()
                 }
             }
             .environment(appState)
+            .preferredColorScheme(previewColorScheme)
             .task { await appState.checkAuth() }
         }
     }

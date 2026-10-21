@@ -15,6 +15,14 @@ final class AppState {
     }
 
     func checkAuth() async {
+#if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--kitchen-ui-tests") {
+            sessionToken = "ui-test-session"
+            isAuthenticated = true
+            isLoading = false
+            return
+        }
+#endif
         let token = await Task.detached(priority: .userInitiated) {
             KeychainHelper.getToken()
         }.value

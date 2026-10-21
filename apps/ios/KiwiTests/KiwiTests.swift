@@ -1,6 +1,7 @@
 import Testing
 @testable import Kiwi
 import Foundation
+import UIKit
 
 // MARK: - Domain Model Tests
 

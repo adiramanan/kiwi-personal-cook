@@ -1,5 +1,11 @@
 # Kiwi — Architecture Overview
 
+## Current kitchen workflow (2026-10-21)
+
+The native app now separates stocking the fridge from deciding what to cook. Camera/library images pass through recognition and editable review, then merge into account-owned inventory. A later recipe request loads that inventory and the whole family's profiles from PostgreSQL. Nutrition totals, personal portions and missing-item groups are calculated and checked on the server before rendering.
+
+New code is in the iOS Kitchen feature and the backend kitchen route/model/schema/cooking service. All `/v1/kitchen/*` endpoints use existing authentication. New tables reference users with cascade deletion; shopping is account-scoped local storage. The existing `/v1/scan` workflow documented below remains a compatibility API. See [the current scope and endpoint contract](KITCHEN_FEATURES.md).
+
 ## System Overview
 
 Kiwi is a personal chef / cooking assistant that helps people cook healthier meals using what's already in their fridge. The user takes a photo of their fridge, the app identifies ingredients via an LLM with vision capability, and returns 2–4 fast, low-effort recipe recommendations with substitution suggestions.

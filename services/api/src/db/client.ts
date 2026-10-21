@@ -1,14 +1,11 @@
 import postgres from "postgres";
+import { config } from "../utils/config.js";
 
 let sql: postgres.Sql;
 
 export function getDb(): postgres.Sql {
   if (!sql) {
-    const databaseUrl = process.env.DATABASE_URL;
-    if (!databaseUrl) {
-      throw new Error("DATABASE_URL is not set");
-    }
-    sql = postgres(databaseUrl, {
+    sql = postgres(config.databaseUrl, {
       max: 10,
       idle_timeout: 20,
       connect_timeout: 10,

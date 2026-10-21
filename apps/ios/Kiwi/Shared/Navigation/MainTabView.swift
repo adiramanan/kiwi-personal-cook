@@ -1,65 +1,33 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab: AppTab = .kiwi
-    @State private var showScanSheet = false
-    @State private var previousTab: AppTab = .kiwi
-
-    enum AppTab: Int, Hashable {
-        case kiwi
-        case groceries
-        case profile
-        case camera
-    }
+    @Environment(AppState.self) private var appState
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var kitchen = KitchenStore.makeDefault()
 
     var body: some View {
-        TabView(selection: cameraTabBinding) {
-            Tab("Kiwi", systemImage: "diamond.fill", value: AppTab.kiwi) {
-                NavigationStack {
-                    ChatView()
-                }
+        TabView {
+            Tab("Cook", systemImage: "fork.knife") {
+                NavigationStack { CookHomeView() }
             }
-
-            Tab("Groceries", systemImage: "circle.fill", value: AppTab.groceries) {
-                NavigationStack {
-                    GroceriesView()
-                }
+            Tab("Fridge", systemImage: "refrigerator") {
+                NavigationStack { FridgeInventoryView() }
             }
-
-            Tab("Profile", systemImage: "triangle.fill", value: AppTab.profile) {
-                NavigationStack {
-                    ProfileView()
-                }
-            }
-
-            Tab("Scan", systemImage: "camera.fill", value: AppTab.camera) {
-                Color.clear
+            Tab("Family", systemImage: "person.2") {
+                NavigationStack { FamilyView() }
             }
         }
-        .tint(.kiwiGreen)
-        .fullScreenCover(isPresented: $showScanSheet) {
-            NavigationStack {
-                ScanView()
-            }
+        .tint(.kitchenGreen)
+        .environment(kitchen)
+        .task { await kitchen.refresh() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await kitchen.refresh() } }
         }
+        .onChange(of: appState.isAuthenticated) { _, authenticated in
+            if !authenticated { kitchen.clearLocalAccountData() }
+        }
+        .alert("Couldn't finish", isPresented: Binding(get: { kitchen.error != nil }, set: { if !$0 { kitchen.error = nil } })) {
+            Button("OK") { kitchen.error = nil }
+        } message: { Text(kitchen.error ?? "") }
     }
-
-    private var cameraTabBinding: Binding<AppTab> {
-        Binding(
-            get: { selectedTab },
-            set: { newTab in
-                if newTab == .camera {
-                    showScanSheet = true
-                } else {
-                    previousTab = selectedTab
-                    selectedTab = newTab
-                }
-            }
-        )
-    }
-}
-
-#Preview {
-    MainTabView()
-        .environment(AppState())
 }

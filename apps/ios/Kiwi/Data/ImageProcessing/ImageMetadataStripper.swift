@@ -1,7 +1,7 @@
 import UIKit
 import ImageIO
 
-struct ImageMetadataStripper: Sendable {
+nonisolated struct ImageMetadataStripper: Sendable {
     private let maxSizeBytes: Int
     private let initialQuality: CGFloat
 

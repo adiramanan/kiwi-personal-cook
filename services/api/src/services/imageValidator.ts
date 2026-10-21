@@ -27,7 +27,7 @@ export function validateImage(
     return { valid: false, error: "Only JPEG images are accepted" };
   }
 
-  if (buffer.length >= 3 && !buffer.subarray(0, 3).equals(JPEG_MAGIC_BYTES)) {
+  if (buffer.length < 3 || !buffer.subarray(0, 3).equals(JPEG_MAGIC_BYTES)) {
     return { valid: false, error: "File does not appear to be a valid JPEG" };
   }
 

@@ -4,6 +4,7 @@ import { validateImage } from "../services/imageValidator.js";
 import { analyzeImage, LLMError } from "../services/llm.js";
 import { incrementScanCount } from "../models/quota.js";
 import { logger } from "../utils/logger.js";
+import { config } from "../utils/config.js";
 
 const scan = new Hono<AppEnv>();
 
@@ -34,8 +35,7 @@ scan.post("/", async (c) => {
   }
 
   try {
-    const apiKey = process.env.OPENAI_API_KEY!;
-    const result = await analyzeImage(buffer, apiKey);
+    const result = await analyzeImage(buffer, config.openaiApiKey);
 
     await incrementScanCount(userId);
 

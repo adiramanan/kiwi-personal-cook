@@ -56,6 +56,18 @@ describe("LLM service", () => {
     expect(result.ingredients).toHaveLength(2);
     expect(result.recipes).toHaveLength(1);
     expect(result.recipes[0].name).toBe("Quick Scrambled Eggs");
+    const request = mockCreate.mock.calls[0][0];
+    expect(request).toMatchObject({
+      model: "gpt-6-luna",
+      reasoning_effort: "low",
+      max_completion_tokens: 4096,
+    });
+    expect(request).not.toHaveProperty("temperature");
+    expect(request).not.toHaveProperty("max_tokens");
+    expect(request.messages[1].content[0]).toEqual({
+      type: "image_url",
+      image_url: { url: `data:image/jpeg;base64,${Buffer.from("test").toString("base64")}` },
+    });
   });
 
   it("throws LLMError for malformed JSON", async () => {

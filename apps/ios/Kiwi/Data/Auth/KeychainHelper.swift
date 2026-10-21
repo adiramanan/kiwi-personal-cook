@@ -1,7 +1,9 @@
 import Foundation
 import Security
 
-enum KeychainHelper {
+// Stateless wrapper over the thread-safe Security framework; nonisolated so
+// callers can do Keychain I/O off the main actor.
+nonisolated enum KeychainHelper {
     private static let service = "com.kiwi.session"
     private static let account = "sessionToken"
 

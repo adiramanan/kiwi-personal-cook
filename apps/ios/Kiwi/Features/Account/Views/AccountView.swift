@@ -1,13 +1,14 @@
 import SwiftUI
 
 struct ProfileView: View {
+    var onAccountDeleted: () -> Void = {}
     @Environment(AppState.self) private var appState
     @State private var viewModel = AccountViewModel()
 
     var body: some View {
         List {
             Section("Dietary Preferences") {
-                Label("Coming soon", systemImage: "fork.knife")
+                Label("Manage each person’s preferences and goals in Family", systemImage: "fork.knife")
                     .foregroundStyle(.secondary)
             }
 
@@ -47,6 +48,7 @@ struct ProfileView: View {
                 Task {
                     do {
                         try await viewModel.deleteAccount()
+                        onAccountDeleted()
                         appState.signOut()
                     } catch {
                         viewModel.error = error as? APIError ?? .unknown
